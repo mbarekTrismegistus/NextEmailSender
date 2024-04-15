@@ -2,10 +2,14 @@
 
 import React, { useState } from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle} from "@nextui-org/react";
+import { useSession, signIn } from "next-auth/react";
 
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  let session = useSession()
+  console.log(session)
 
   return (
     <Navbar className="dark justify-start px-[50px]" maxWidth={'full'}>
@@ -20,7 +24,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">
         <NavbarItem>
           <Button color="primary" href="#" variant="shadow">
-            Choose A Template
+            {session ? session.status == "loading" ? "loading..." : session.data?.user.name : ""}
           </Button>
         </NavbarItem>
         <NavbarItem>
@@ -32,7 +36,7 @@ export default function Header() {
       <NavbarMenu className="dark">
             <NavbarMenuItem>
               <Button color="primary" href="#" variant="shadow">
-                Choose A Template
+                {session.name}
               </Button>
             </NavbarMenuItem>
             <NavbarMenuItem>

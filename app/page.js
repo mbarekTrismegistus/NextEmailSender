@@ -15,8 +15,8 @@ export default function page() {
                     </Button>
                 </div>
         </div>
-        <div className="flex-1 spline3d justify-self-center ms-auto overflow-visible ">
-            <spline-viewer url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" height={"600px"}></spline-viewer>        
+        <div className="flex-1 spline3d flex justify-content-center items-center">
+            <spline-viewer url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" style={{minHeight:"160%",minWidth:"100%"}}></spline-viewer>        
         </div>
     </div>
   )

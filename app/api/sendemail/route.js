@@ -1,8 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import Email from '@/app/email';
-import { render } from '@react-email/render';
+import prisma from '@/prisma/client';
 
 
 export async function POST(request) {
@@ -29,6 +28,15 @@ export async function POST(request) {
         "subject": "helloo",
         "html": html.data
     }
+
+    await prisma.email.create({
+        data: {
+            template: "1",
+            sender: "momoboogeyman2000@gmail.com",
+            recievers: ["mbarek.talbi666@gmail.com"],
+            userId: 1
+        }
+    })
 
     await transporter.sendMail(options)
 
