@@ -30,7 +30,7 @@ export default function RawHtmlSender() {
   })
   
   return (
-    <div className='dark mx-auto p-[50px] px-[120px]'>
+    <div className='dark mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
       <h1 className='font-bold text-5xl text-center my-3'>Send Email using html</h1>
       <TagsInput
         value={selected}

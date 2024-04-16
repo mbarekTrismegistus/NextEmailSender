@@ -23,9 +23,9 @@ export default function Header() {
 
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">
         <NavbarItem>
-          <Button color="primary" href="#" variant="shadow">
-            {session ? session.status == "loading" ? "loading..." : session.data?.user.name : ""}
-          </Button>
+          
+          {session.data == undefined ? session.status == "loading" ? " loading..." : "no session" : session.data.user.name}
+
         </NavbarItem>
         <NavbarItem>
           <Button color="primary" href="#" variant="bordered">

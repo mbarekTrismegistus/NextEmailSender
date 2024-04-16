@@ -24,19 +24,19 @@ export async function POST(request) {
 
     const options = {
         "from": "momoboogeyman2000@gmail.com",
-        "to": "mbarek.talbi666@gmail.com",
+        "to": "yousratribak1@gmail.com",
         "subject": "helloo",
         "html": html.data
     }
 
-    await prisma.email.create({
-        data: {
-            template: "1",
-            sender: "momoboogeyman2000@gmail.com",
-            recievers: ["mbarek.talbi666@gmail.com"],
-            userId: 1
-        }
-    })
+    // await prisma.email.create({
+    //     data: {
+    //         template: "1",
+    //         sender: "momoboogeyman2000@gmail.com",
+    //         recievers: ["mbarek.talbi666@gmail.com"],
+    //         userId: 1
+    //     }
+    // })
 
     await transporter.sendMail(options)
 
