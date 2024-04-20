@@ -1,5 +1,6 @@
 // import { Inter } from "next/font/google";
 import "./globals.css";
+import "primereact/resources/themes/lara-dark-indigo/theme.css";
 import TanstackProvider from "@/tanstackProvider";
 import { Providers } from "./providerNextUi";
 import Header from "./header";
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <TanstackProvider>
         <html lang="en">
-          <body className="text-white">
+          <body className="dark text-white">
             <SessionProvider>
               <Providers>
                 <Header/>

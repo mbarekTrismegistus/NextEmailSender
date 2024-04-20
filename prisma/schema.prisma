@@ -15,12 +15,13 @@ datasource db {
 
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name String  @unique
+  id Int @id @default(autoincrement())
+  name String @unique
   email String
   smptpass String
   password  String
   role String
+  image String
   emails Email[]
 }
 

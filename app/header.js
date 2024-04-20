@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle} from "@nextui-org/react";
 import { useSession, signIn } from "next-auth/react";
+import {Avatar} from "@nextui-org/react";
 
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   let session = useSession()
-  console.log(session)
+
 
   return (
     <Navbar className="dark justify-start px-[50px]" maxWidth={'full'}>
@@ -24,7 +25,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">
         <NavbarItem>
           
-          {session.data == undefined ? session.status == "loading" ? " loading..." : "no session" : session.data.user.name}
+        {session.data == undefined ? session.status == "loading" ? " loading..." : "no session" : <Avatar isBordered color="primary" src={`${session.data.user.image}`}/>}
 
         </NavbarItem>
         <NavbarItem>
@@ -35,9 +36,7 @@ export default function Header() {
       </NavbarContent>
       <NavbarMenu className="dark">
             <NavbarMenuItem>
-              <Button color="primary" href="#" variant="shadow">
-                {session.name}
-              </Button>
+                {session.data == undefined ? session.status == "loading" ? " loading..." : "no session" : <Avatar isBordered color="primary" src={`${session.data.user.image}`}/>}
             </NavbarMenuItem>
             <NavbarMenuItem>
               <Button color="primary" href="#" variant="bordered">
@@ -45,7 +44,7 @@ export default function Header() {
               </Button>
             </NavbarMenuItem>
 
-          </NavbarMenu>
+      </NavbarMenu>
     </Navbar>
   );
 }

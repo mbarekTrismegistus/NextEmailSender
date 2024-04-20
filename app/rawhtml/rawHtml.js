@@ -1,30 +1,34 @@
 "use client"
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import {Button, Textarea, select} from "@nextui-org/react";
-import {Input} from "@nextui-org/react";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import {Button} from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
-import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import { dracula } from '@uiw/codemirror-theme-dracula';
+import { html as htmlLang } from '@codemirror/lang-html';
 import { TagsInput } from "react-tag-input-component";
+import { Toast } from 'primereact/toast';
 import axios from 'axios';
 
 
 export default function RawHtmlSender() {
-  const [html, setHtml] = useState('')
-  const [email, setEmail] = useState('')
+  const [html, setHtml] = useState('');
   const [selected, setSelected] = useState([]);
+  const toast = useRef(null);
 
-  let code = `${html}`
 
-  const {mutate: send} = useMutation({
+  const {mutate: send, isPending} = useMutation({
     mutationFn: async() => {
-      await axios.post("/api/sendemail" , { data: html})
+      await axios.post("/api/sendemail" , { data: {
+        html: html,
+        emails: selected
+      }})
     },
     onSuccess: () => {
-        console.log("done")
+      toast.current.show({ severity: 'success', summary: 'Success', detail: 'Email sent !' });
+    },
+    onError: () => {
+      toast.current.show({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
     }
 
   })
@@ -32,33 +36,29 @@ export default function RawHtmlSender() {
   return (
     <div className='dark mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
       <h1 className='font-bold text-5xl text-center my-3'>Send Email using html</h1>
+      <Toast ref={toast} />
       <TagsInput
         value={selected}
         onChange={setSelected}
         name=""
         placeHolder="Enter Emails"
         classNames={"emails"}
+        
+        
       />
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-        <div>
-            <p>Code Display</p>
-            <SyntaxHighlighter language="html" className="max-h-[400px] min-h-[400px]" style={atomOneDark}>
-                {code}
-            </SyntaxHighlighter>
-        </div>
 
         <div className='min-h-[400px]'>
             <p>Write your code here :</p>
             <CodeMirror
               value={html}
-              theme={vscodeDark}
+              theme={dracula}
               onChange={(e) => setHtml(e)}
               className="max-h-[400px] min-h-[400px] overflow-y-scroll"
+              extensions={htmlLang()}
             />
         </div>
-      </div>
       
-      <Button color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>
+      <Button isDisabled={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>
     </div>
   )
 }

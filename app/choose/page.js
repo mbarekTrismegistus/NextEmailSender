@@ -7,7 +7,7 @@ export default function page() {
     
     
   return (
-    <div>
+    <div className='choose'>
         <Choose/>
     </div>
   )

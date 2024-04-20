@@ -6,7 +6,7 @@ import prisma from '@/prisma/client';
 
 export async function POST(request) {
     
-    let html = await request.json()
+    let data = await request.json()
 
 
     const transporter = nodemailer.createTransport({
@@ -24,9 +24,9 @@ export async function POST(request) {
 
     const options = {
         "from": "momoboogeyman2000@gmail.com",
-        "to": "yousratribak1@gmail.com",
+        "to": data.data.emails,
         "subject": "helloo",
-        "html": html.data
+        "html": data.data.html
     }
 
     // await prisma.email.create({
