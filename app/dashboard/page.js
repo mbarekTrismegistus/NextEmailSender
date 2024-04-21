@@ -5,17 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Chart } from 'primereact/chart';
 import { useState } from 'react';
 import { Select,SelectItem } from '@nextui-org/react';
-import { trefoil } from 'ldrs'
 import axios from 'axios';
 import EmailsList from './components/emailsList';
 import UsersList from './components/usersList';
-        
 
-trefoil.register()
 
 export default function page() {
-
-    
 
     const [range, setRange] = useState({
       options: {

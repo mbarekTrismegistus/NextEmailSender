@@ -7,15 +7,18 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { Skeleton } from '@nextui-org/react';
 import axios from 'axios';
-import { trefoil } from 'ldrs'
 
 
-trefoil.register()
+
+
 
 export default function EmailsList() {
 
     const params = useSearchParams()
     const router = useRouter()
+    
+
+    
 
     let page = Number(params.get("page"))
 

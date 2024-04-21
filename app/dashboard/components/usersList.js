@@ -3,7 +3,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Tooltip, Skeleton, Spinner} from "@nextui-org/react";
 import axios from 'axios';
-import { trefoil } from 'ldrs'
 import { DeleteIcon } from '@/app/components/DeleteIcon';
 import { useQueryClient } from '@tanstack/react-query';
 import { Toast } from 'primereact/toast';
@@ -20,8 +19,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useRef } from 'react';
 
-
-trefoil.register()
 
 export default function UsersList() {
 
