@@ -2,11 +2,13 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import prisma from '@/prisma/client';
+import { auth } from '@/auth/auth';
 
 
 export async function POST(request) {
     
     let data = await request.json()
+    let session = await auth()
 
 
     const transporter = nodemailer.createTransport({
@@ -14,8 +16,8 @@ export async function POST(request) {
         port: 465,
         secure: true,
         auth: {
-            user: 'momoboogeyman2000@gmail.com',
-            pass: 'kqbh frwu orwt nsvg',
+            user: session.user.email,
+            pass: session.user.smptpass,
         },
         tls: {
             ciphers:'SSLv3'
@@ -23,20 +25,20 @@ export async function POST(request) {
     });
 
     const options = {
-        "from": "momoboogeyman2000@gmail.com",
+        "from": session.user.email,
         "to": data.data.emails,
         "subject": "helloo",
         "html": data.data.html
     }
 
-    // await prisma.email.create({
-    //     data: {
-    //         template: "1",
-    //         sender: "momoboogeyman2000@gmail.com",
-    //         recievers: ["mbarek.talbi666@gmail.com"],
-    //         userId: 1
-    //     }
-    // })
+    await prisma.email.create({
+        data: {
+            template: "1",
+            sender: "momoboogeyman2000@gmail.com",
+            recievers: data.data.emails,
+            userId: 1
+        }
+    })
 
     await transporter.sendMail(options)
 

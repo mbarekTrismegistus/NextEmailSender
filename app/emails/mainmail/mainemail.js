@@ -6,7 +6,7 @@ import { Button as ButtonUi } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import { render } from '@react-email/render';
 import axios from 'axios';
-import Email from '../email';
+import Email from '@/emails';
 
 
 

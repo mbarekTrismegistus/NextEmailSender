@@ -1,8 +1,8 @@
 "use client"
 
 import { Button, Card, CardBody, CardFooter, CardHeader, Image } from "@nextui-org/react";
-import Email from "../email";
-import { Tabs } from "../components/tabs";
+import Email from "../../email";
+import { Tabs } from "../../components/tabs";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -43,7 +43,7 @@ export default function Choose() {
     ]
   return (
     <div>
-        <div className="h-[10rem] md:h-[40rem] [perspective:1000px] relative dark b flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-40 ">
+        <div className="h-[10rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-40 ">
             <p className="md:text-6xl mx-auto font-bold text-center mb-[60px] hero-text">Choose A Template</p>
             <Tabs tabs={tabs} choose={setTemplate} activeTabClassName={"text-black"}/>
             

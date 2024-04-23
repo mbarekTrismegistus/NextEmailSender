@@ -94,7 +94,7 @@ export default function page() {
     })
 
   return (
-    <div className="md:p-[50px] dark">
+    <div className="md:p-[50px]">
         <Toast ref={toast} />
         <h1 className="text-3xl md:text-6xl font-bold mb-[35px] hero-text">Create An Account</h1>
         <div className="md:flex">

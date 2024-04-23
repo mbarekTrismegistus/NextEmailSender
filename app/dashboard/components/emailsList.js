@@ -1,12 +1,13 @@
 "use client"
 
 import { useQuery } from '@tanstack/react-query';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { Skeleton } from '@nextui-org/react';
 import axios from 'axios';
+import { useState } from 'react';
 
 
 
@@ -16,6 +17,7 @@ export default function EmailsList() {
 
     const params = useSearchParams()
     const router = useRouter()
+    const [user, setUser] = useState(undefined)
     
 
     
@@ -23,15 +25,25 @@ export default function EmailsList() {
     let page = Number(params.get("page"))
 
     const {data: emails, isFetching, isLoading, isError} = useQuery({
-        queryKey: [page,'emails'],
+        queryKey: [page,'emails',user],
         queryFn: async () => {
           const data = await axios.post("/api/getEmailsHistory", { data: {
             take: 5,
-            skip: (page * 5) - 5
+            skip: (page * 5) - 5,
+            user: user
           }})
           return data.data
         }
     })
+
+    const {data: users, isLoading:isUsersLoading} = useQuery({
+      queryKey: ['users'],
+      queryFn: async () => {
+        const { data } = await axios.post("/api/getUsers")
+        return data.data
+      }
+    })
+    console.log((emails?.emailsCount/5))
 
     
   return (
@@ -44,6 +56,23 @@ export default function EmailsList() {
 
         :
         <Table aria-label="Example static collection table"
+            topContent={
+              isUsersLoading ? 
+              <Skeleton className='rounded-xl w-full h-full'/>
+              :
+              <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
+                  <SelectItem key={"all"} value={undefined}>
+                    All
+                  </SelectItem>
+                  {users.map((u) => {
+                    return(
+                      <SelectItem key={u.id} value={u.id}>
+                        {u.name}
+                      </SelectItem>
+                    )
+                  })}
+              </Select>
+            }
             bottomContent={
               
                 <div className="flex w-full justify-center">
@@ -70,7 +99,7 @@ export default function EmailsList() {
               <TableColumn>Template</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
-            <TableBody loadingContent={"loading"} loadingState={isFetching ? "loading" : "idle"}>
+            <TableBody loadingContent={"loading"} emptyContent={"No rows to display."} loadingState={isFetching ? "loading" : "idle"}>
               {emails.data.map((e) => {
                 return(
                   <TableRow key={e.id}>

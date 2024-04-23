@@ -4,7 +4,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Chart } from 'primereact/chart';
 import { useState } from 'react';
-import { Select,SelectItem } from '@nextui-org/react';
+import { Select,SelectItem, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
 import axios from 'axios';
 import EmailsList from './components/emailsList';
 import UsersList from './components/usersList';
@@ -55,7 +55,7 @@ export default function page() {
 
 
     function formatDate(date) {
-      var dd = date.getDate();
+      var dd = date.getDate() + 1
       var mm = date.getMonth() + 1;
       var yyyy = date.getFullYear();
       if (dd < 10) {
@@ -108,7 +108,7 @@ export default function page() {
         }
         else{
           d.setDate(d.getDate() - i);
-          label.push(d.getDate() - 1)
+          label.push(d.getDate())
         }
       }
  
@@ -130,7 +130,7 @@ export default function page() {
   return (
 
     <div className='p-[30px]'>
-      <p className="md:text-5xl font-bold mb-[40px]">Dashboard</p>
+      <p className="md:text-5xl font-bold mb-[40px] hero-text">Dashboard</p>
       {isLoading ? 
         <div className='flex items-center justify-center'>
           <l-trefoil
@@ -147,46 +147,70 @@ export default function page() {
         <div className='p-5 mx-auto'>
         <div className='w-[100%]'>
           <p className="md:text-xl">Statistics</p>
-          <div className='max-w-xs ms-auto ps-5'>
-            <Select label="Data Range" placeholder="Select a range" onChange={handleSelectChange} selectedKeys={[selectValue]}>
-                  <SelectItem key={"lastWeek"} value={"lastWeek"}>
-                    Last Week
-                  </SelectItem>
-                  <SelectItem key={"lastMonth"} value={"lastMonth"}>
-                    Last Month
-                  </SelectItem>
-                  <SelectItem key={"lastYear"} value={"lastYear"}>
-                    Last Year
-                  </SelectItem>
-            </Select>
+          <div className='lg:flex gap-4 items-stretch'>
+            <Table className='flex-1 mt-5' hideHeader topContent={
+              
+                <Select label="Data Range" placeholder="Select a range" onChange={handleSelectChange} selectedKeys={[selectValue]}>
+                      <SelectItem key={"lastWeek"} value={"lastWeek"}>
+                        Last Week
+                      </SelectItem>
+                      <SelectItem key={"lastMonth"} value={"lastMonth"}>
+                        Last Month
+                      </SelectItem>
+                      <SelectItem key={"lastYear"} value={"lastYear"}>
+                        Last Year
+                      </SelectItem>
+                </Select>
+            
+            }>
+              <TableHeader>
+                <TableColumn>
+                  Chart
+                </TableColumn>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                      <Chart className='mx-auto w-full h-full mb-[40px]' type="bar" data={
+                        {
+                          labels: getlabels(range),
+                          datasets: [
+                              {
+                                  label: 'Emails Sent',
+                                  data: stats,
+                                  backgroundColor: [
+                                      'rgba(255, 159, 64, 0.2)',
+                                      'rgba(75, 192, 192, 0.2)',
+                                      'rgba(54, 162, 235, 0.2)',
+                                      'rgba(153, 102, 255, 0.2)'
+                                    ],
+                                    borderColor: [
+                                      'rgb(255, 159, 64)',
+                                      'rgb(75, 192, 192)',
+                                      'rgb(54, 162, 235)',
+                                      'rgb(153, 102, 255)'
+                                    ],
+                                    borderWidth: 1
+                                  }
+                              ]
+                          }
+                      } 
+                      options={chartOptions}
+                      />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <div className='flex-1 mt-5'>
+              <div className='grid h-[100%] grid-cols-2 gap-4'>
+                  <div className='bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full min-h-[150px] rounded-3xl'>ff</div>
+                  <div className='bg-gradient-to-r from-cyan-500 to-blue-500 h-full min-h-[150px] rounded-3xl'>ff</div>
+                  <div className='bg-gradient-to-r from-sky-500 to-indigo-500 h-full min-h-[150px] rounded-3xl'>ff</div>
+                  <div className='bg-gradient-to-r from-purple-500 to-pink-500 h-full min-h-[150px] rounded-3xl'>ff</div>
+              </div>
+            </div>
           </div>
           
-          <Chart className='mx-auto md:h-[300px] h-[150px] mb-[40px]' type="bar" data={
-            {
-              labels: getlabels(range),
-              datasets: [
-                  {
-                      label: 'Emails Sent',
-                      data: stats,
-                      backgroundColor: [
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 159, 64)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)'
-                        ],
-                        borderWidth: 1
-                      }
-                  ]
-              }
-          } 
-          options={chartOptions}
-          />
           <p className="md:text-xl">Email Sent</p>
 
           <EmailsList/>

@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import ScriptSpline from "./script";
 
 export default function page() {
   return (
@@ -20,9 +21,10 @@ export default function page() {
                     </Link>
                 </div>
         </div>
-        <div className="flex-1 flex justify-content-center items-center">
-            <spline-viewer url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" style={{minHeight:"160%",minWidth:"100%"}}></spline-viewer>        
+        <div className="flex-1 min-h-[300px] min-w-[400px] flex md:h-[400px] md:min-w-[500px] items-center justify-content-center">
+            <spline-viewer className="flex items-center" id="spline" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" style={{width:"100%", height:"100%"}} ></spline-viewer>        
         </div>
+        <ScriptSpline/>
     </div>
   )
 }

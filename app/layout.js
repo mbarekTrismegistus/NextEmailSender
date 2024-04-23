@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <TanstackProvider>
         <html lang="en">
-          <body className="dark text-white">
+          <body className="bg-bgImage">
             <SessionProvider>
               <Providers>
                 <Header/>

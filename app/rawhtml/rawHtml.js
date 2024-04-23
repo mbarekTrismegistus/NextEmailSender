@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import {Button} from "@nextui-org/react";
+import {Button, Skeleton} from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { html as htmlLang } from '@codemirror/lang-html';
@@ -14,6 +14,7 @@ import axios from 'axios';
 export default function RawHtmlSender() {
   const [html, setHtml] = useState('');
   const [selected, setSelected] = useState([]);
+  const [isMounted, setIsMounted] = useState(false)
   const toast = useRef(null);
 
 
@@ -32,9 +33,14 @@ export default function RawHtmlSender() {
     }
 
   })
+
+
+  useEffect(() => {
+    setIsMounted(true)
+  },[])
   
   return (
-    <div className='dark mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
+    <div className='mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
       <h1 className='font-bold text-5xl text-center my-3'>Send Email using html</h1>
       <Toast ref={toast} />
       <TagsInput
@@ -49,13 +55,17 @@ export default function RawHtmlSender() {
 
         <div className='min-h-[400px]'>
             <p>Write your code here :</p>
-            <CodeMirror
-              value={html}
-              theme={dracula}
-              onChange={(e) => setHtml(e)}
-              className="max-h-[400px] min-h-[400px] overflow-y-scroll"
-              extensions={htmlLang()}
-            />
+            {isMounted ? 
+              <CodeMirror
+                value={html}
+                theme={dracula}
+                onChange={(e) => setHtml(e)}
+                className="max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl scrollbar"
+                extensions={htmlLang()}
+              />
+            :
+            <Skeleton className='max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl '/>
+            }
         </div>
       
       <Button isDisabled={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>

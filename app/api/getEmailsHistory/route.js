@@ -6,6 +6,9 @@ export async function POST(request) {
     const params = await request.json()
 
     let data = await prisma.email.findMany({
+        where:{
+            userId: Number(params.data.user) || undefined
+        },
         include: {
             user: true
         },
@@ -15,7 +18,11 @@ export async function POST(request) {
             dateSend: "desc"
         }
     })
-    let emailsCount = await prisma.email.count()
+    let emailsCount = await prisma.email.count({
+        where: {
+            userId: Number(params.data.user) || undefined
+        }
+    })
 
     return NextResponse.json({ data: data, emailsCount: emailsCount })
     

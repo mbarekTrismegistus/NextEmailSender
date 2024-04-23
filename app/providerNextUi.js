@@ -10,7 +10,7 @@ import {ThemeProvider as NextThemesProvider} from "next-themes";
 export function Providers({children}) {
   return (
     <NextUIProvider>
-      <NextThemesProvider>
+      <NextThemesProvider attribute="class">
         <PrimeReactProvider>
           {children}
         </PrimeReactProvider>

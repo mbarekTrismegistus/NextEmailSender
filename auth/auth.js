@@ -2,25 +2,25 @@ import prisma from "@/prisma/client";
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
- 
+
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
+
       credentials: {
         name: {},
         password: {},
       },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const userAccount = await prisma.user.findUnique({
+      authorize: async(credentials) => {
+        
+        const user = await prisma.user.findUnique({
           where: {
             name: credentials.name
           }
         })
   
-        if (userAccount) {
+        if (user) {
 
           let pass = await prisma.user.findUnique({
             select:{
@@ -31,10 +31,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           })
           
-         
-          
           if(credentials.password == pass.password){
-            return userAccount
+
+              return user
+
           }
       
         } else {
@@ -44,41 +44,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
-      callbacks: {
-        async jwt({session,token,user,trigger}) {
-          if(trigger === "update"){
-            token = session
-          }
-          if(user){
-            return {
-              ...token,
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              role: user.role,
-              image: user.image
-
-            }
-          }
-          return token;
-        },
-        async session({ session, token, user }) {
-  
-          return {
-            ...session.user,
-            id: token.id,
-            name: token.name,
-            email: token.email,
-            role: token.role,
-            image: token.image
-            
-  
-          }
-        },
-        async redirect({ url, baseUrl }) {
-          return url
-        }
-      }
+      
     }),
   ],
+  callbacks: {
+    async jwt({user,session,token,trigger}) {
+      if(trigger === "update"){
+        token = session
+      }
+      if(user){
+        return {
+          ...token,
+          role: user.role,
+          smptpass: user.smptpass
+        }
+      }
+      return token
+
+    },
+    async session({ session, token }) {
+      session.user = {
+        ...session.user,
+        role: token.role,
+        smptpass: token.smptpass
+        
+      }
+      console.log(session)
+      return session
+    },
+    async redirect({ url, baseUrl }) {
+      return url
+    }
+  }
 })
