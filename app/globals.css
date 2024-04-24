@@ -7,7 +7,7 @@
   :root {
     --foreground: black;
     --background: url('/bglight.jpg');
-    --background-color: #ececec;
+    --background-color: #ffffff;
   }
   .dark {
     --background: url('/bg.png');
@@ -32,15 +32,18 @@
     background-color: var(--background-color)!important;
     width: 100%!important;
     border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
   
   .rti--container{
     background-color: rgba(0, 0, 0, 0)!important;
     border: none!important;
     margin: 30px!important;
+    padding: 0!important;
+  
   }
   .rti--input:focus{
-    border: none!important;
+    border: #1b1b1b 1px solid!important;
   }
   .rti--container:focus-within{
     box-shadow: none!important;
@@ -48,6 +51,9 @@
   }
   .cm-scroller{
     min-height: 400px!important;
+  }
+  .cm-editor{
+    border-radius: 0.75rem!important; 
   }
 
 
@@ -70,7 +76,6 @@
   background-clip: padding-box;
   border-radius: 9999px;
   background-color: #AAAAAA;
-  
 }
 
 .scrollbar::-webkit-scrollbar-track {
@@ -90,3 +95,11 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.cm-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.skeleton{
+  animation-duration: 5s!important;
+}
+

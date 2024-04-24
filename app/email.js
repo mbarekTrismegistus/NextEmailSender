@@ -61,7 +61,7 @@ export default function Email(props){
                             </Section>
                         </Column>
                         <Column className='text-center p-3 pt-[30px] px-[12px]'>
-                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'  width={"100%"}/>
+                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/2-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'  width={"100%"}/>
                             <Section>
                                 <Text className='text-black font-black m-0 mb-3 text-xl'>ATTAQUE DE LA REINE</Text>
                                 <Row>
@@ -91,7 +91,7 @@ export default function Email(props){
                             </Section>
                         </Column>
                         <Column className='text-center p-3 pt-[30px] px-[12px]'>
-                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma' width={"100%"}/>
+                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/33-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma' width={"100%"}/>
                             <Section>
                                 <Text className='text-black font-black m-0 mb-3 text-xl'>ATTAQUE DE LA REINE</Text>
                                 <Row>
@@ -122,7 +122,7 @@ export default function Email(props){
                         </Column>
                     </Row>
                     <Row>
-                        <Button href='#' className='block bg-[#CF1C1C] py-3 text-center'>
+                        <Button href='https://brosmedia.ma/community-manager-maroc/' className='block bg-[#CF1C1C] py-3 mx-5 text-center'>
                             See More
                         </Button>
                     </Row>

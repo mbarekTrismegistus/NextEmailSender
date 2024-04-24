@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Card, CardBody, CardFooter, CardHeader, Image } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import Email from "../../email";
 import { Tabs } from "../../components/tabs";
 import { useState } from "react";
@@ -15,7 +15,7 @@ export default function Choose() {
           value: "product",
           content: (
             <div className="w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 text-white bg-gradient-to-br from-purple-700 to-violet-900 scrollbar">
-              <p>Product Tab</p>
+              <p className="text-2xl font-bold">Product Tab</p>
               <Email/>
             </div>
           ),
@@ -48,7 +48,7 @@ export default function Choose() {
             <Tabs tabs={tabs} choose={setTemplate} activeTabClassName={"text-black"}/>
             
         </div>
-        <Link href={`/${template || "default"}`}>
+        <Link href={`emails/${template || "mainmail"}`}>
             <Button className="mx-auto" color="primary" variant="shadow">
                 Choose
             </Button>

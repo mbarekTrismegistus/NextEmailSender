@@ -7,6 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import {Avatar} from "@nextui-org/react";
 import ThemeSwitcher from "./components/themeSwitcher";
 import Link from "next/link";
+import { BoxArrowLeft, CodeSlash, Envelope } from "react-bootstrap-icons";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,8 +30,7 @@ export default function Header() {
           
         {session.data == undefined ? session.status == "loading" ? <Skeleton className="rounded-full w-[40px] h-[40px]"/> : 
         <div>
-          <Button color="primary" variant="shadow" className="mx-2"><Link href="/api/auth/signin">Login</Link></Button> 
-          <Button color="primary" variant="bordered" className="mx-2"><Link href="/registre">Create an Account</Link></Button> 
+          <Button color="primary" variant="bordered" className="mx-2"><Link href="/api/auth/signin">Login</Link></Button> 
         </div>
         : 
         <Dropdown placement="bottom-center">
@@ -42,8 +42,17 @@ export default function Header() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{session.data.user.email}</p>
             </DropdownItem>
-            
-            <DropdownItem key="logout" color="danger" onClick={signOut}>
+            <DropdownItem className="py-3" endContent={<Envelope size={20}/>}>
+              <Link href={'/emails/choose'}>
+                Choose a Template
+              </Link>
+            </DropdownItem>
+            <DropdownItem className="py-3" endContent={<CodeSlash size={20}/>}>
+              <Link href={'/rawhtml'}>
+                Send Email With HTML
+              </Link>
+            </DropdownItem>
+            <DropdownItem key="logout" color="danger" onClick={signOut} className="py-3" endContent={<BoxArrowLeft size={20}/>}>
               Log Out
             </DropdownItem>
           </DropdownMenu>

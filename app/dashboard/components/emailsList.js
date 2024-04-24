@@ -1,7 +1,7 @@
 "use client"
 
 import { useQuery } from '@tanstack/react-query';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select, Spinner} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
@@ -55,7 +55,7 @@ export default function EmailsList() {
           </Skeleton>
 
         :
-        <Table aria-label="Example static collection table"
+        <Table
             topContent={
               isUsersLoading ? 
               <Skeleton className='rounded-xl w-full h-full'/>
@@ -99,7 +99,7 @@ export default function EmailsList() {
               <TableColumn>Template</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
-            <TableBody loadingContent={"loading"} emptyContent={"No rows to display."} loadingState={isFetching ? "loading" : "idle"}>
+            <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching ? "loading" : "idle"}>
               {emails.data.map((e) => {
                 return(
                   <TableRow key={e.id}>

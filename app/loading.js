@@ -1,6 +1,6 @@
 export default function Loading() {
     return (
-      <div className='d-flex align-items-center justify-content-center h-100 w-100 '>
+      <div className='d-flex align-items-center mx-auto block justify-content-center'>
         <l-trefoil
                 size="80"
                 stroke="4"

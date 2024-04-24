@@ -39,6 +39,7 @@ export default function UsersList() {
         }
       })
     }
+    console.log(userData)
 
 
     const {data, isFetching, isLoading, isError} = useQuery({
@@ -73,6 +74,7 @@ export default function UsersList() {
       }
       
     })
+    
 
     
     return (
@@ -163,7 +165,7 @@ export default function UsersList() {
                                           onChange={(e) => handleUserData(e)}
                                         />
 
-                                        <Select label={"role"}>
+                                        <Select label={"role"} name='role' onChange={(e) => handleUserData(e)}>
                                           <SelectItem key={"admin"} value={"admin"}>
                                             Admin
                                           </SelectItem>

@@ -5,7 +5,7 @@ import TanstackProvider from "@/tanstackProvider";
 import { Providers } from "./providerNextUi";
 import Header from "./header";
 import { SessionProvider } from "next-auth/react";
-
+import ScriptSpline from "./script";
 
 
 export const metadata = {
@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
             <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.93/build/spline-viewer.js"></script>
             <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/trefoil.js"></script>
           </body>
+          <ScriptSpline/>
         </html>
     </TanstackProvider>
   );

@@ -5,9 +5,11 @@ import { useMutation } from '@tanstack/react-query';
 import {Button, Skeleton} from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from '@uiw/codemirror-theme-dracula';
+import { githubLight } from '@uiw/codemirror-theme-github';
 import { html as htmlLang } from '@codemirror/lang-html';
 import { TagsInput } from "react-tag-input-component";
 import { Toast } from 'primereact/toast';
+import { useTheme } from 'next-themes';
 import axios from 'axios';
 
 
@@ -16,6 +18,7 @@ export default function RawHtmlSender() {
   const [selected, setSelected] = useState([]);
   const [isMounted, setIsMounted] = useState(false)
   const toast = useRef(null);
+  const {theme} = useTheme()
 
 
   const {mutate: send, isPending} = useMutation({
@@ -38,10 +41,11 @@ export default function RawHtmlSender() {
   useEffect(() => {
     setIsMounted(true)
   },[])
+  console.log(theme)
   
   return (
     <div className='mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
-      <h1 className='font-bold text-5xl text-center my-3'>Send Email using html</h1>
+      <h1 className='font-bold text-5xl text-center my-3 hero-text'>Send Email using html</h1>
       <Toast ref={toast} />
       <TagsInput
         value={selected}
@@ -58,9 +62,9 @@ export default function RawHtmlSender() {
             {isMounted ? 
               <CodeMirror
                 value={html}
-                theme={dracula}
+                theme={theme == "dark" ? dracula : githubLight}
                 onChange={(e) => setHtml(e)}
-                className="max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl scrollbar"
+                className="max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl text-[16px] cm-scrollbar"
                 extensions={htmlLang()}
               />
             :
@@ -68,7 +72,7 @@ export default function RawHtmlSender() {
             }
         </div>
       
-      <Button isDisabled={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>
+      <Button isDisabled={isPending} isLoading={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>
     </div>
   )
 }
