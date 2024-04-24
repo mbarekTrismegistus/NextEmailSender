@@ -1,10 +1,12 @@
 import prisma from "@/prisma/client";
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+const baseUrl = process.env.BASE_URL
 
 
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  
   providers: [
     Credentials({
 
