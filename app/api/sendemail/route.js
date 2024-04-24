@@ -36,7 +36,7 @@ export async function POST(request) {
             template: "1",
             sender: session.user.email || "momoboogeyman2000@gmail.com",
             recievers: data.data.emails || ["momoboogeyman2000@gmail.com"],
-            userId: session.user.id || 1
+            userId: Number(session.user.id) || 1
         }
     })
 
