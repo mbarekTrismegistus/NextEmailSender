@@ -56,6 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if(user){
         return {
           ...token,
+          id: user.id,
           role: user.role,
           smptpass: user.smptpass
         }
@@ -66,6 +67,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       session.user = {
         ...session.user,
+        id: token.id,
         role: token.role,
         smptpass: token.smptpass
         

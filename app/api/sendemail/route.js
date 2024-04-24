@@ -25,18 +25,18 @@ export async function POST(request) {
     });
 
     const options = {
-        "from": session.user.email,
-        "to": data.data.emails,
+        "from": session.user.email || "momoboogeyman2000@gmail.com",
+        "to": data.data.emails || ["momoboogeyman2000@gmail.com"],
         "subject": "helloo",
-        "html": data.data.html
+        "html": data.data.html || "<h1>Cron Function</h1>"
     }
 
     await prisma.email.create({
         data: {
             template: "1",
-            sender: "momoboogeyman2000@gmail.com",
-            recievers: data.data.emails,
-            userId: 1
+            sender: session.user.email || "momoboogeyman2000@gmail.com",
+            recievers: data.data.emails || ["momoboogeyman2000@gmail.com"],
+            userId: session.user.id || 1
         }
     })
 
