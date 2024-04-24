@@ -9,13 +9,11 @@ export default async function middleware(req){
         if (session.user.role !== "admin" && req.nextUrl.pathname.startsWith("/dashboard")) {
           return NextResponse.redirect(process.env.BASE_URL)
         }
-        else{
-          return NextResponse.redirect(process.env.BASE_URL)
-        }
     }
     else{
-        return NextResponse.redirect(process.env.BASE_URL)
+      return NextResponse.redirect(process.env.BASE_URL)
     }
+
 
 }
 
