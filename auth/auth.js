@@ -77,10 +77,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       console.log(session)
       return session
     },
-    async redirect({ url, baseUrl }) {
+    async redirect() {
       console.log(baseUrl)
-      console.log(url)
-      return url
+      return baseUrl
     }
   }
 })
