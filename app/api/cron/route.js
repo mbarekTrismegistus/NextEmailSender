@@ -9,5 +9,5 @@ export async function POST() {
     );
     console.log(result)
    
-    return Response.json({ result });
+    return Response.json({ result }); 
   }
