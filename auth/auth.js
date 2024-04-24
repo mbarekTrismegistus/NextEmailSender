@@ -1,7 +1,6 @@
 import prisma from "@/prisma/client";
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-const baseUrl = process.env.BASE_URL
 
 
 
@@ -77,9 +76,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       console.log(session)
       return session
     },
-    async redirect() {
-      console.log(baseUrl)
-      return baseUrl
+    async redirect({ url, baseUrl }) {
+      return url
     }
   }
 })
