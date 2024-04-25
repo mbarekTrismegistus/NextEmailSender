@@ -12,6 +12,7 @@ export async function GET() {
             date: new Date().toISOString()
         }
     })
+    console.log("run")
 
     if(d){
         d.map((e) => {
