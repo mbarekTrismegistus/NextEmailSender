@@ -16,8 +16,7 @@ export async function GET() {
             user: true
         },
         where: {
-            isSent: false,
-            date: date
+            isSent: false
         }
     })
 
@@ -32,6 +31,7 @@ export async function GET() {
 
 
     const transporter = nodemailer.createTransport({
+        name: 'smtp.gmail.com',
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -50,16 +50,16 @@ export async function GET() {
         "subject": "helloo",
         "html": html
     }
-    let result = await transporter.sendMail(options)
+    let result = await transporter.sendMail(options) 
 
-    await prisma.email.create({
-        data: {
-            template: d[0].template || "Html",
-            sender: d[0].user.email,
-            recievers: d[0].recievers,
-            userId: d[0].user.id
-        }
-    })
+    // await prisma.email.create({
+    //     data: {
+    //         template: d[0].template || "Html",
+    //         sender: d[0].user.email,
+    //         recievers: d[0].recievers,
+    //         userId: d[0].user.id
+    //     }
+    // })
 
     
 
