@@ -18,10 +18,10 @@ export async function GET() {
 
        
             let result = axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
-                    user: e[0].user,
-                    recievers: e[0].recievers,
-                    html: e[0].html || undefined,
-                    template: e[0].template || undefined,
+                    user: d[0].user,
+                    recievers: d[0].recievers,
+                    html: d[0].html || undefined,
+                    template: d[0].template || undefined,
             }})
     
     console.log("run")
