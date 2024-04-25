@@ -15,7 +15,7 @@ export async function GET() {
         }
     })
 
-    let result = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
+    await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
         user: d[0].user,
         recievers: d[0].recievers,
         html: d[0].html || undefined,
