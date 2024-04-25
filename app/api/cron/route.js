@@ -26,5 +26,5 @@ export async function GET() {
             }})
         })
     }
-    return Response.json({ message: d });
+    return NextResponse.json({ message: "ok" });
 }
