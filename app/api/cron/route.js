@@ -16,15 +16,15 @@ export async function GET() {
     })
     console.log(date)
 
-        d.map((e) => {
-            axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
-                    user: e.user,
-                    recievers: e.recievers,
-                    html: e.html || undefined,
-                    template: e.template || undefined,
+       
+            let result = axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
+                    user: e[0].user,
+                    recievers: e[0].recievers,
+                    html: e[0].html || undefined,
+                    template: e[0].template || undefined,
             }})
-        })
+    
     console.log("run")
 
-    return NextResponse.json({ message: date });
+    return NextResponse.json({ message: result });
 }

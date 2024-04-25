@@ -52,7 +52,7 @@ export async function POST(request) {
 
     await transporter.sendMail(options)
 
-    return NextResponse.json({message: "ok"})
+    return NextResponse.json({message: "ok sent"})
 
     
 }
