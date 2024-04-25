@@ -14,17 +14,12 @@ export async function GET() {
             date: date
         }
     })
-    console.log(date)
 
-       
-            let result = axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
-                    user: d[0].user,
-                    recievers: d[0].recievers,
-                    html: d[0].html || undefined,
-                    template: d[0].template || undefined,
-            }})
-    
-    console.log("run")
-
+    let result = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
+        user: d[0].user,
+        recievers: d[0].recievers,
+        html: d[0].html || undefined,
+        template: d[0].template || undefined,
+    }})
     return NextResponse.json({ message: result });
 }
