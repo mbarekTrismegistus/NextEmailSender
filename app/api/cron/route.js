@@ -21,6 +21,5 @@ export async function GET() {
         html: d[0].html || undefined,
         template: d[0].template || undefined,
     }})
-    console.log(result.status)
-    return NextResponse.json({ message: result.status });
+    return NextResponse.json({ message: result.data });
 }
