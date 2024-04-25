@@ -50,7 +50,8 @@ export async function GET() {
         "subject": "helloo",
         "html": html
     }
-    let result = await transporter.sendMail(options) 
+    console.log(transporter)
+    // let result = await transporter.sendMail(options) 
 
     // await prisma.email.create({
     //     data: {
@@ -72,5 +73,5 @@ export async function GET() {
     //     html: d[0].html || undefined,
     //     template: d[0].template || undefined,
     // }})
-    return NextResponse.json({ message: result });
+    return NextResponse.json({ message: transporter });
 }
