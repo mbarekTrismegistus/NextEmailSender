@@ -21,5 +21,5 @@ export async function GET() {
         html: d[0].html || undefined,
         template: d[0].template || undefined,
     }})
-    return NextResponse.json({ message: result });
+    return NextResponse.json({ message: "ok" });
 }
