@@ -1,18 +1,20 @@
 import prisma from '@/prisma/client'
 import axios from 'axios';
 import { NextResponse } from 'next/server'
+import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 
 export async function GET() {
+    let date = today(getLocalTimeZone()).toDate()
     let d = await prisma.schedule.findMany({
         include: {
             user: true
         },
         where: {
             isSent: false,
-            date: new Date().toISOString()
+            date: date
         }
     })
-    console.log("run")
+    console.log(date)
 
     if(d){
         d.map((e) => {
