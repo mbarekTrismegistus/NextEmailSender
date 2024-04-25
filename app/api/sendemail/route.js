@@ -36,7 +36,7 @@ export async function POST(request) {
             template: "1",
             sender: session.user.email,
             recievers: data.data.emails,
-            userId: session.user.id
+            userId: Number(session.user.id)
         }
     })
 
