@@ -15,11 +15,12 @@ export async function GET() {
         }
     })
 
-    await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
+    let result = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, { data : {
         user: d[0].user,
         recievers: d[0].recievers,
         html: d[0].html || undefined,
         template: d[0].template || undefined,
     }})
-    return NextResponse.json({ message: "ok" });
+    console.log(result.status)
+    return NextResponse.json({ message: result.status });
 }
