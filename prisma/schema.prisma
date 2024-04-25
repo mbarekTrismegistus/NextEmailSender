@@ -25,6 +25,7 @@ model User {
   role String
   image String
   emails Email[]
+  schedules Schedule[]
 }
 
 model Email {
@@ -33,6 +34,18 @@ model Email {
   template String
   sender String
   recievers String[]
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model Schedule {
+  id Int @id @default(autoincrement())
+  date DateTime
+  html String @db.Text @default("")
+  template String @default("")
+  sender String
+  recievers String[]
+  isSent Boolean
   user User @relation(fields: [userId], references: [id])
   userId Int
 }

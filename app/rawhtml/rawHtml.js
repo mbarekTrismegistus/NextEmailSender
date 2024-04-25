@@ -41,7 +41,7 @@ export default function RawHtmlSender() {
   useEffect(() => {
     setIsMounted(true)
   },[])
-  console.log(theme)
+
   
   return (
     <div className='mx-auto md:p-[50px] p-[30px] md:px-[120px]'>

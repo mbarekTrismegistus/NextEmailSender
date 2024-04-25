@@ -13,7 +13,8 @@
   "dependencies": {
     "@auth/core": "^0.30.0",
     "@codemirror/lang-html": "^6.4.9",
-    "@nextui-org/react": "^2.2.10",
+    "@internationalized/date": "^3.5.2",
+    "@nextui-org/react": "^2.3.6",
     "@prisma/client": "^5.12.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
