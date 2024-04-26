@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@nextui-org/react";
-import Email from "@/emails/mainmain";
+import Email from "@/emails/main";
 import { Tabs } from "../../components/tabs";
 import { useState } from "react";
 import Link from "next/link";
