@@ -4,54 +4,60 @@ import { NextResponse } from 'next/server'
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 import dynamic from 'next/dynamic';
 import { renderAsync } from '@react-email/render';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+import nodemailer from 'nodemailer'
 
 export async function GET() {
 
-    let date = today(getLocalTimeZone()).toDate()
-    let html
+    // const resend = new Resend('re_S9m5Yo8b_CDvXhJcrTEKMYWzHzjhte6zR');
 
-    let d = await prisma.schedule.findMany({
-        include: {
-            user: true
-        },
-        where: {
-            isSent: false
-        }
-    })
+    // resend.emails.send({
+    // from: 'onboarding@resend.dev',
+    // to: 'momoboogeyman2000@gmail.com',
+    // subject: 'Hello World',
+    // html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+    // });
 
-    if(d[0].template){
-        const Email = dynamic(async() => await import(`../../../emails/${d[0].template}`))
-        html = await renderAsync(<Email/>)
+    // let date = today(getLocalTimeZone()).toDate()
+    // let html
 
-    }
-    else if(d[0].html){
-        html = d[0].html
-    }
+    // let d = await prisma.schedule.findMany({
+    //     include: {
+    //         user: true
+    //     },
+    //     where: {
+    //         isSent: false
+    //     }
+    // })
+
+    // if(d[0].template){
+    //     const Email = dynamic(async() => await import(`../../../emails/${d[0].template}`))
+    //     html = await renderAsync(<Email/>)
+
+    // }
+    // else if(d[0].html){
+    //     html = d[0].html
+    // }
 
 
-    const transporter = nodemailer.createTransport({
-        name: 'smtp.gmail.com',
-        host: 'smtp.gmail.com',
+    const transport = nodemailer.createTransport({
+        host: 'smtp.zoho.com',
         port: 465,
-        secure: true,
+        secure: true, //ssl
         auth: {
-            user: d[0].user.email,
-            pass: d[0].user.smptpass,
-        },
-        tls: {
-            ciphers:'SSLv3'
+            user:"mbarektalbi@zohomail.com",
+            pass: "JPqbkC1fg2AV"
         }
     });
 
     const options = {
-        "from": d[0].user.email,
-        "to": d[0].recievers,
+        "from": 'mbarektalbi@zohomail.com',
+        "to": "momoboogeyman2000@gmail.com",
         "subject": "helloo",
-        "html": html
+        "html": "<h1>zoho email</h1>"
     }
-    // console.log(transporter)
-    // let result = await transporter.sendMail(options) 
+
+    await transport.sendMail(options) 
 
     // await prisma.email.create({
     //     data: {

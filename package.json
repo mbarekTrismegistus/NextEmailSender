@@ -57,6 +57,7 @@
     "react-tag-input-component": "^2.0.2",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
+    "resend": "^3.2.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"
   },
