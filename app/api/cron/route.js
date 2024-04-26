@@ -5,17 +5,18 @@ import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 import dynamic from 'next/dynamic';
 import { renderAsync } from '@react-email/render';
 import { Resend } from 'resend';
+import nodemailer from 'nodemailer'
 
 export async function GET() {
 
-    const resend = new Resend('re_S9m5Yo8b_CDvXhJcrTEKMYWzHzjhte6zR');
+    const resend = new Resend('re_dLFcqiHD_NNWssnCRgtwuj1SrYaGKbTEB');
 
-    resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'momoboogeyman2000@gmail.com',
-    subject: 'Hello World',
-    html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
-    });
+    // let result = await resend.emails.send({
+    //     from: 'onboarding@resend.dev',
+    //     to: 'mbarektalbi@zohomail.com',
+    //     subject: 'Hello World',
+    //     html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+    // });
 
     // let date = today(getLocalTimeZone()).toDate()
     // let html
@@ -39,28 +40,25 @@ export async function GET() {
     // }
 
 
-    // const transporter = nodemailer.createTransport({
-    //     name: 'smtp.gmail.com',
-    //     host: 'smtp.gmail.com',
-    //     port: 465,
-    //     secure: true,
-    //     auth: {
-    //         user: d[0].user.email,
-    //         pass: d[0].user.smptpass,
-    //     },
-    //     tls: {
-    //         ciphers:'SSLv3'
-    //     }
-    // });
+    const transporter = nodemailer.createTransport({
+        name: 'smtp.zoho.com',
+        host: 'smtp.zoho.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: "mbarektalbi@zohomail.com",
+            pass: "AKLYwFnwKRgG",
+        }
+    });
 
-    // const options = {
-    //     "from": d[0].user.email,
-    //     "to": d[0].recievers,
-    //     "subject": "helloo",
-    //     "html": html
-    // }
-    // console.log(transporter)
-    // let result = await transporter.sendMail(options) 
+    const options = {
+        "from": "mbarektalbi@zohomail.com",
+        "to": "mbarektalbi@zohomail.com",
+        "subject": "helloo",
+        "html": '<h1>Zoho</h1>'
+    }
+
+    let result = await transporter.sendMail(options) 
 
     // await prisma.email.create({
     //     data: {
@@ -82,5 +80,5 @@ export async function GET() {
     //     html: d[0].html || undefined,
     //     template: d[0].template || undefined,
     // }})
-    return NextResponse.json({ message: "ok" });
+    return NextResponse.json({ message: result });
 }
