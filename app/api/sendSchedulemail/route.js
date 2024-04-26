@@ -1,7 +1,5 @@
 
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import prisma from '@/prisma/client';
 import dynamic from 'next/dynamic';
 import { renderAsync } from '@react-email/render';
 
@@ -12,37 +10,15 @@ export async function POST(request) {
     let data = await request.json()
     let html
     if(data.data.template){
-        const Email = dynamic(async() => await import(`../../../emails/${data.data.template}`))
+        let template = data.data.template
+        const Email = dynamic(async() => await import(`../../../emails/${template}`))
         html = await renderAsync(<Email/>, {
             pretty: true
         })
-
     }
     else if(data.data.html){
         html = data.data.html
     }
-    console.log(html)
-
-
-    // const transporter = nodemailer.createTransport({
-    //     host: 'smtp.gmail.com',
-    //     port: 465,
-    //     secure: true,
-    //     auth: {
-    //         user: data.data.user.email,
-    //         pass: data.data.user.smptpass,
-    //     },
-    //     tls: {
-    //         ciphers:'SSLv3'
-    //     }
-    // });
-
-    // const options = {
-    //     "from": data.data.user.email,
-    //     "to": data.data.recievers,
-    //     "subject": "helloo",
-    //     "html": html
-    // }
 
     await fetch("https://api.resend.com/emails", {
             method: "POST",
@@ -66,8 +42,6 @@ export async function POST(request) {
     //         userId: data.data.user.id
     //     }
     // })
-
-    // await transporter.sendMail(options)
 
     return NextResponse.json({message: "ok sent"})
 
