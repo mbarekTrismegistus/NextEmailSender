@@ -2,13 +2,13 @@ import prisma from '@/prisma/client'
 import axios from 'axios';
 import { NextResponse } from 'next/server'
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { renderAsync } from '@react-email/render';
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer'
 
-// export const runtime = 'edge'; 
-// export const dynamic = 'force-dynamic';
+export const runtime = 'edge'; 
+export const dynamic = 'force-dynamic';
 export async function GET() {
 
     const resend = new Resend('re_dLFcqiHD_NNWssnCRgtwuj1SrYaGKbTEB');
