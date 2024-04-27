@@ -16,9 +16,10 @@ export async function GET() {
             isSent: false
         }
     })
+    let res
 
     d.map(async(e) => {
-        await fetch(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+        res = await fetch(`${process.env.BASE_URL}/api/sendSchedulemail`, {
             method: "POST",
             body: JSON.stringify({
                 data: e
@@ -47,7 +48,8 @@ export async function GET() {
     // }
 
     // await transporter.sendMail(options)
+    console.log(res)
     
-    return NextResponse.json({message: "aok"});
+    return NextResponse.json({message: res});
 
 }
