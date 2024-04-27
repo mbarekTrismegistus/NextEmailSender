@@ -31,15 +31,18 @@ export async function GET() {
         "html": "light function"
     }
 
-    // let d = await prisma.schedule.findMany({
-    //     include: {
-    //         user: true
-    //     },
-    //     where: {
-    //         isSent: false
-    //     }
-    // })
-
+    let d = await prisma.schedule.findMany({
+        include: {
+            user: true
+        },
+        where: {
+            isSent: false
+        }
+    })
+    
+    d.forEach(async() => {
+        await transporter.sendMail(options)
+    })
     // d.forEach(async(e) => {
     //     await fetch("https://api.resend.com/emails", {
     //         method: "POST",
@@ -56,7 +59,7 @@ export async function GET() {
     //     });
     // })
 
-    await transporter.sendMail(options)
+    
     
     return NextResponse.json({message: "ok"});
 
