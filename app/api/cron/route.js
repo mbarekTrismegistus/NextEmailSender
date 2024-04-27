@@ -17,11 +17,17 @@ export async function GET() {
             isSent: false
         }
     })
+    let res
 
     d.forEach(async(e) => {
         res = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
             data: e
         })
+        if(res == undefined){
+            res = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+                data: e
+            })
+        }
     })
     
     return NextResponse.json({message: res});
