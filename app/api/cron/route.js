@@ -19,11 +19,11 @@ export async function GET() {
     })
 
     d.forEach(async(e) => {
-        res = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+        await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
             data: e
         })
     })
     
-    return NextResponse.json({message: res});
+    return NextResponse.json({message: "ok"});
 
 }
