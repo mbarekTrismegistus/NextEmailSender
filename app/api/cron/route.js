@@ -10,30 +10,52 @@ const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
 
 export async function GET() {
 
-    let d = await prisma.schedule.findMany({
-        include: {
-            user: true
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: "momoboogeyman2000@gmail.com",
+            pass: "yzrr zowi zzil zclt",
         },
-        where: {
-            isSent: false
+        tls: {
+            ciphers:'SSLv3'
         }
-    })
+    });
 
-    d.forEach(async(e) => {
-        await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${RESEND_API_KEY}`,
-            },
-            body: JSON.stringify({
-            from: "Acme <onboarding@resend.dev>",
-            to: ["momoboogeyman2000@gmail.com"],
-            subject: "hello world",
-            html: "html",
-            }),
-        });
-    })
+    const options = {
+        "from": "momoboogeyman2000@gmail.com",
+        "to": "momoboogeyman2000@gmail.com",
+        "subject": "helloo",
+        "html": "light function"
+    }
+
+    // let d = await prisma.schedule.findMany({
+    //     include: {
+    //         user: true
+    //     },
+    //     where: {
+    //         isSent: false
+    //     }
+    // })
+
+    // d.forEach(async(e) => {
+    //     await fetch("https://api.resend.com/emails", {
+    //         method: "POST",
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${RESEND_API_KEY}`,
+    //         },
+    //         body: JSON.stringify({
+    //         from: "Acme <onboarding@resend.dev>",
+    //         to: ["momoboogeyman2000@gmail.com"],
+    //         subject: "hello world",
+    //         html: "html",
+    //         }),
+    //     });
+    // })
+
+    await transporter.sendMail(options)
     
     return NextResponse.json({message: "ok"});
 

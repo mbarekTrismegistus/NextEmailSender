@@ -43,7 +43,7 @@ export default function EmailsList() {
         return data.data
       }
     })
-    console.log((emails?.emailsCount/5))
+
 
     
   return (

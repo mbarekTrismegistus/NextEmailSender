@@ -12,6 +12,8 @@ import UsersList from './components/usersList';
 
 export default function page() {
 
+    
+
     const [range, setRange] = useState({
       options: {
         range: 7,
@@ -54,8 +56,8 @@ export default function page() {
     }
 
 
-    function formatDate(date) {
-      var dd = date.getDate() + 1
+    function formatDate(date, range) {
+      var dd = date.getDate() + (range.options.increment == 30 ? 0 : 1)
       var mm = date.getMonth() + 1;
       var yyyy = date.getFullYear();
       if (dd < 10) {
@@ -70,15 +72,14 @@ export default function page() {
     }
 
     function Period(range) {
-      var result = [];
-
+      let result = [];
       for (var i = 0; i < range.options.range; i += range.options.increment) {
         var d = new Date();
         d.setDate(d.getDate() - i);
-        result.push(formatDate(d))
+        result.push(formatDate(d, range))
+        console.log(result)
       }
-      
-      return (result);
+      return result;
     }
 
     const {data: stats, isLoading, isError} = useQuery({
@@ -89,6 +90,7 @@ export default function page() {
         return data.data
       }
     })
+
     
 
 

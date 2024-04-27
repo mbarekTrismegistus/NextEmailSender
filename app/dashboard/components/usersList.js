@@ -39,7 +39,7 @@ export default function UsersList() {
         }
       })
     }
-    console.log(userData)
+
 
 
     const {data, isFetching, isLoading, isError} = useQuery({
