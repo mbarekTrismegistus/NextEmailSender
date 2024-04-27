@@ -54,34 +54,13 @@ export async function GET() {
     
     
 
-    await new Promise((resolve, reject) => {
-        // verify connection configuration
-        transporter.verify(function (error, success) {
-            if (error) {
-                console.log(error);
-                reject(error);
-            } else {
-                console.log("Server is ready to take our messages");
-                resolve(success);
-            }
-        });
-    });
 
-    await new Promise((resolve, reject) => {
+    let res = await new Promise((resolve, reject) => {
         // send mail
         d.forEach(() => {
-            transporter.sendMail(mailData, (err, info) => {
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                } else {
-                    console.log(info);
-                    resolve(info);
-                }
-            });
+            transporter.sendMail(mailData);
         })
     });
-    
    
     
 
@@ -102,7 +81,8 @@ export async function GET() {
     // })
 
     
-    
-    return NextResponse.json({message: "ok"});
+    Promise.resolve(res).then(() => {
+        return NextResponse.json({message: "ok"});
+    })
 
 }
