@@ -39,10 +39,49 @@ export async function GET() {
             isSent: false
         }
     })
+
+    const mailData = {
+        from: {
+            name: `momoboogeyman2000@gmail.com`,
+            address: "momoboogeyman2000@gmail.com",
+        },
+        replyTo: "momoboogeyman2000@gmail.com",
+        to: "momoboogeyman2000@gmail.com",
+        subject: `form message`,
+        text: "momoboogeyman2000@gmail.com",
+        html: `momoboogeyman2000@gmail.com`,
+    };
     
-    d.forEach(async() => {
-        await transporter.sendMail(options)
-    })
+    
+    await new Promise((resolve, reject) => {
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log("Server is ready to take our messages");
+                resolve(success);
+            }
+        });
+    });
+
+    await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(mailData, (err, info) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                console.log(info);
+                resolve(info);
+            }
+        });
+    });
+    
+   
+    
+
     // d.forEach(async(e) => {
     //     await fetch("https://api.resend.com/emails", {
     //         method: "POST",
