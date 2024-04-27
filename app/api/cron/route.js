@@ -1,12 +1,11 @@
 import prisma from '@/prisma/client'
+import axios from 'axios';
 
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
-// export const runtime = "edge";
 export const revalidate = 0
 
-const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
 
 export async function GET() {
 
@@ -19,24 +18,12 @@ export async function GET() {
         }
     })
 
-    
-        let res = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${RESEND_API_KEY}`,
-            },
-            body: JSON.stringify({
-            from: "Acme <onboarding@resend.dev>",
-            to: ["momoboogeyman2000@gmail.com"],
-            subject: "hello world",
-            html: "edge runtim",
-            }),
-        }).then(() => {
-            return NextResponse.json({message: res.statusText});
+    d.forEach(async(e) => {
+        res = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+            data: e
         })
-
+    })
     
-    
+    return NextResponse.json({message: res});
 
 }
