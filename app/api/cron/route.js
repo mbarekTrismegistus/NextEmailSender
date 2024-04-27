@@ -57,8 +57,13 @@ export async function GET() {
 
     let res = await new Promise((resolve, reject) => {
         // send mail
-        d.forEach(() => {
-            transporter.sendMail(mailData);
+        d.forEach((e) => {
+            fetch(`${process.env.BASE_URL}/api/sendSchedulemail`,{
+                method: "POST",
+                body: JSON.stringify({
+                    data: e
+                })
+            })
         })
     });
    

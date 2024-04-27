@@ -39,7 +39,6 @@ export async function POST(request) {
             }),
         });
 
-    console.log(res.statusText)
 
   
 
