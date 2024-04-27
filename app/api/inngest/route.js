@@ -18,14 +18,36 @@ export async function GET() {
     })
 
 
-    d.map(async(e) => {
-        await fetch(`${process.env.BASE_URL}/api/sendSchedulemail`, {
-            method: "POST",
-            body: JSON.stringify({
-                data: e
-            })
-        })
-    })
+    // d.map(async(e) => {
+    //     await fetch(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             data: e
+    //         })
+    //     })
+    // })
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: "momoboogeyman2000@gmail.com",
+            pass: 'yzrr zowi zzil zclt',
+        },
+        tls: {
+            ciphers:'SSLv3'
+        }
+    });
+
+    const options = {
+        "from": "momoboogeyman2000@gmail.com",
+        "to": "momoboogeyman2000@gmail.com",
+        "subject": "helloo",
+        "html": "momoboogeyman2000@gmail.com"
+    }
+
+    await transporter.sendMail(options)
     
     return NextResponse.json({message: "aok"});
 
