@@ -1,5 +1,4 @@
 import prisma from '@/prisma/client'
-import axios from 'axios';
 
 import { NextResponse } from "next/server";
 
@@ -19,9 +18,19 @@ export async function GET() {
     })
 
     d.forEach(async(e) => {
-        await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
-            data: e
-        })
+        await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+            from: "Acme <onboarding@resend.dev>",
+            to: ["momoboogeyman2000@gmail.com"],
+            subject: "hello world",
+            html: "html",
+            }),
+        });
     })
     
     return NextResponse.json({message: "ok"});
