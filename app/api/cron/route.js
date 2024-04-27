@@ -1,4 +1,5 @@
 import prisma from '@/prisma/client'
+import axios from 'axios';
 
 import { NextResponse } from "next/server";
 
@@ -16,16 +17,13 @@ export async function GET() {
             isSent: false
         }
     })
-    let res
 
-    d.map(async(e) => {
-        res = await fetch(`${process.env.BASE_URL}/api/sendSchedulemail`, {
-            method: "POST",
-            body: JSON.stringify({
-                data: e
-            })
-        })
+    d.forEach(async(e) => {
+        res = await axios.post(`${process.env.BASE_URL}/api/sendSchedulemail`, {
+            data: e})
     })
+  
+    
 
     // const transporter = nodemailer.createTransport({
     //     host: 'smtp.gmail.com',
@@ -48,7 +46,7 @@ export async function GET() {
     // }
 
     // await transporter.sendMail(options)
-    console.log(res)
+
     
     return NextResponse.json({message: res});
 

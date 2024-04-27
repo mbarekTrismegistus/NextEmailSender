@@ -23,7 +23,8 @@ export async function POST(request) {
     }
 
 
-    let res = await fetch("https://api.resend.com/emails", {
+
+    let res = await axios("https://api.resend.com/emails", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -37,7 +38,9 @@ export async function POST(request) {
             }),
         });
 
-    console.log(res)
+    console.log(res.statusText)
+
+  
 
     // await prisma.email.create({
     //     data: {
