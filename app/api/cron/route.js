@@ -3,7 +3,7 @@ import prisma from '@/prisma/client'
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
+// export const runtime = "edge";
 export const revalidate = 0
 
 const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
@@ -20,7 +20,7 @@ export async function GET() {
     })
 
     
-        await fetch("https://api.resend.com/emails", {
+        let res = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -32,9 +32,11 @@ export async function GET() {
             subject: "hello world",
             html: "edge runtim",
             }),
-        });
+        }).then(() => {
+            return NextResponse.json({message: res.statusText});
+        })
 
     
-    return NextResponse.json({message: "ok"});
+    
 
 }
