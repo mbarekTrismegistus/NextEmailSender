@@ -53,6 +53,7 @@ export async function GET() {
     };
     
     
+
     await new Promise((resolve, reject) => {
         // verify connection configuration
         transporter.verify(function (error, success) {
@@ -68,15 +69,17 @@ export async function GET() {
 
     await new Promise((resolve, reject) => {
         // send mail
-        transporter.sendMail(mailData, (err, info) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            } else {
-                console.log(info);
-                resolve(info);
-            }
-        });
+        d.forEach(() => {
+            transporter.sendMail(mailData, (err, info) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    console.log(info);
+                    resolve(info);
+                }
+            });
+        })
     });
     
    
