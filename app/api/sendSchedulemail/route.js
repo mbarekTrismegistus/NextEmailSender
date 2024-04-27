@@ -24,7 +24,7 @@ export async function POST(request) {
 
 
 
-    let res = await axios("https://api.resend.com/emails", {
+    let res = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
