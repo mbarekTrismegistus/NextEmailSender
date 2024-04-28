@@ -91,6 +91,14 @@ export default function page() {
       }
     })
 
+    const {data: statsCard, isLoadingStats, isErrorStats} = useQuery({
+      queryKey: ["stats"],
+      queryFn: async () => {
+        const { data } = await axios.post("/api/stats")
+        return data.data
+      }
+    })
+
     
 
 
@@ -133,7 +141,7 @@ export default function page() {
 
     <div className='p-[30px]'>
       <p className="md:text-5xl font-bold mb-[40px] hero-text">Dashboard</p>
-      {isLoading ? 
+      {isLoading || isLoadingStats ? 
         <div className='flex items-center justify-center'>
           <l-trefoil
             size="80"
@@ -205,10 +213,58 @@ export default function page() {
             </Table>
             <div className='flex-1 mt-5'>
               <div className='grid h-[100%] grid-cols-2 gap-4'>
-                  <div className='bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full min-h-[150px] rounded-3xl'>ff</div>
-                  <div className='bg-gradient-to-r from-cyan-500 to-blue-500 h-full min-h-[150px] rounded-3xl'>ff</div>
-                  <div className='bg-gradient-to-r from-sky-500 to-indigo-500 h-full min-h-[150px] rounded-3xl'>ff</div>
-                  <div className='bg-gradient-to-r from-purple-500 to-pink-500 h-full min-h-[150px] rounded-3xl'>ff</div>
+                  <div className='bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                    <p className='font-bold text-2xl self-start hero-text'>
+                      Total Emails
+                    </p>
+                    <div>
+                      <p className='font-bold text-5xl hero-text pb-3'>
+                        {statsCard.count}
+                      </p>
+                      <p>
+                        Email Sent In Total
+                      </p>
+                    </div>
+                  </div>
+                  <div className='bg-gradient-to-r from-cyan-500/50 to-blue-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                    <p className='font-bold text-2xl self-start hero-text'>
+                      Scheduled Emails
+                    </p>
+                    <div>
+                      <p className='font-bold text-5xl hero-text pb-3'>
+                        {statsCard.waitingEmails}
+                      </p>
+                      <p>
+                        Total Email Sent Using a Template
+                      </p>
+                    </div>
+                  </div>
+                  <div className='bg-gradient-to-r from-sky-500/50 to-indigo-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                    <p className='font-bold text-2xl self-start hero-text'>
+                      Sent In HTML 
+                    </p>
+                    <div>
+                      <p className='font-bold text-5xl hero-text pb-3'>
+                        {statsCard.withHtml}
+                      </p>
+                      <p>
+                        Total Email Sent In HTML
+                      </p>
+                    </div>
+                  </div>
+                  <div className='bg-gradient-to-r from-purple-500/50 to-pink-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                    <p className='font-bold text-2xl self-start hero-text'>
+                      Sent Using a Template
+                    </p>
+                    <div>
+                      <p className='font-bold text-5xl hero-text pb-3'>
+                        {statsCard.withTempl}
+                      </p>
+                      <p>
+                        Total Email Sent Using a Template
+                      </p>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

@@ -40,6 +40,14 @@ export async function POST(request) {
         });
 
 
+    await prisma.schedule.update({
+        where: {
+            id: data.data.id
+        },
+        data: {
+            isSent: true
+        }
+    })
   
 
     await prisma.email.create({
