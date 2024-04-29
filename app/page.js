@@ -16,7 +16,7 @@ export default async function page() {
                         {session ?
                         <div>
                             <Link href={`choose`}>
-                                <Button color="primary" href="#" variant="shadow" className="me-2 mt-5">
+                                <Button color="primary" href="#" variant="shadow" className="me-2 text-white mt-5">
                                     Choose A Template
                                 </Button>
                             </Link>

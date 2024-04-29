@@ -21,7 +21,10 @@ export default function Mainemail() {
     const {mutate: send} = useMutation({
         mutationFn: async() => {
             let html = render(email)
-            await axios.post("/api/sendemail" , { data: html })
+            await axios.post("/api/sendemail" , { data: {
+                html: html,
+                emails: ["brosmedia631@gmail.com"]
+            } })
         },
         onSuccess: () => {
             console.log("done")
