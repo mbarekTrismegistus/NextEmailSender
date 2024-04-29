@@ -8,6 +8,7 @@ import { Select,SelectItem, Table, TableBody, TableCell, TableColumn, TableHeade
 import axios from 'axios';
 import EmailsList from './components/emailsList';
 import UsersList from './components/usersList';
+import { ClockFill, EnvelopeFill, FileEarmarkRichtextFill, FiletypeHtml } from 'react-bootstrap-icons';
 
 
 export default function page() {
@@ -57,7 +58,7 @@ export default function page() {
 
 
     function formatDate(date, range) {
-      var dd = date.getDate() + (range.options.increment == 30 ? 0 : 1)
+      var dd = date.getDate()
       var mm = date.getMonth() + 1;
       var yyyy = date.getFullYear();
       if (dd < 10) {
@@ -73,11 +74,10 @@ export default function page() {
 
     function Period(range) {
       let result = [];
-      for (var i = 0; i < range.options.range; i += range.options.increment) {
+      for (var i = 0; i <= range.options.range; i += range.options.increment) {
         var d = new Date();
-        d.setDate(d.getDate() - i);
+        d.setDate(d.getDate() - i + 1);
         result.push(formatDate(d, range))
-        console.log(result)
       }
       return result;
     }
@@ -212,13 +212,16 @@ export default function page() {
               </TableBody>
             </Table>
             <div className='flex-1 mt-5'>
-              <div className='grid h-[100%] grid-cols-2 gap-4'>
+              <div className='grid h-[100%] lg:grid-cols-2 grid-cols-1 gap-4'>
                   <div className='bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50 h-full min-h-[150px] rounded-3xl p-5'>
-                    <p className='font-bold text-2xl self-start hero-text'>
-                      Total Emails
-                    </p>
+                    <div className='flex items-center'>
+                      <EnvelopeFill size={25} className='me-3'/>
+                      <p className='font-bold text-2xl self-start hero-text'>
+                        Total Emails
+                      </p>
+                    </div>
                     <div>
-                      <p className='font-bold text-5xl hero-text pb-3'>
+                      <p className='font-bold text-5xl hero-text py-3'>
                         {statsCard.count}
                       </p>
                       <p>
@@ -227,24 +230,30 @@ export default function page() {
                     </div>
                   </div>
                   <div className='bg-gradient-to-r from-cyan-500/50 to-blue-500/50 h-full min-h-[150px] rounded-3xl p-5'>
-                    <p className='font-bold text-2xl self-start hero-text'>
-                      Scheduled Emails
-                    </p>
+                    <div className='flex items-center'>
+                      <ClockFill size={25} className='me-3'/>
+                      <p className='font-bold text-2xl self-start hero-text'>
+                        Scheduled Emails
+                      </p>
+                    </div>
                     <div>
-                      <p className='font-bold text-5xl hero-text pb-3'>
+                      <p className='font-bold text-5xl hero-text py-3'>
                         {statsCard.waitingEmails}
                       </p>
                       <p>
-                        Total Email Sent Using a Template
+                        Total Email Scheduled
                       </p>
                     </div>
                   </div>
                   <div className='bg-gradient-to-r from-sky-500/50 to-indigo-500/50 h-full min-h-[150px] rounded-3xl p-5'>
-                    <p className='font-bold text-2xl self-start hero-text'>
-                      Sent In HTML 
-                    </p>
+                    <div className='flex items-center'>
+                      <FiletypeHtml size={25} className='me-3'/>
+                      <p className='font-bold text-2xl self-start hero-text'>
+                        Sent In HTML
+                      </p>
+                    </div>
                     <div>
-                      <p className='font-bold text-5xl hero-text pb-3'>
+                      <p className='font-bold text-5xl hero-text py-3'>
                         {statsCard.withHtml}
                       </p>
                       <p>
@@ -253,15 +262,18 @@ export default function page() {
                     </div>
                   </div>
                   <div className='bg-gradient-to-r from-purple-500/50 to-pink-500/50 h-full min-h-[150px] rounded-3xl p-5'>
-                    <p className='font-bold text-2xl self-start hero-text'>
-                      Sent Using a Template
-                    </p>
+                    <div className='flex items-start'>
+                      <FileEarmarkRichtextFill className='me-3' size={25}/>
+                      <p className='font-bold text-2xl self-start hero-text'>
+                        Sent Using a Template
+                      </p>
+                    </div>
                     <div>
-                      <p className='font-bold text-5xl hero-text pb-3'>
+                      <p className='font-bold text-5xl hero-text py-3'>
                         {statsCard.withTempl}
                       </p>
                       <p>
-                        Total Email Sent Using a Template
+                        With a Template
                       </p>
                     </div>
                   </div>
@@ -269,11 +281,11 @@ export default function page() {
             </div>
           </div>
           
-          <p className="md:text-xl">Email Sent</p>
+          <p className="md:text-xl mt-[40px] mb-[30px]">Email Sent</p>
 
           <EmailsList/>
 
-          <p className="md:text-xl mt-[50px]">Users</p>
+          <p className="md:text-xl mt-[40px] mb-[30px]">Users</p>
 
           <UsersList/>
           

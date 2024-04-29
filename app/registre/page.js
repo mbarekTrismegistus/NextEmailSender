@@ -97,8 +97,7 @@ export default function page() {
     <div className="md:p-[50px]">
         <Toast ref={toast} />
         <h1 className="text-3xl md:text-6xl font-bold mb-[35px] hero-text">Create An Account</h1>
-        <div className="md:flex">
-            <div className="flex-1 px-4">
+            <div className="px-4 w-[60%] mx-auto">
                 <div className="flex">
                     <Input label="Name" errorMessage={validated.name ? "Please Enter a name" : ""} isInvalid={validated.name} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} name="name" className={`my-3 me-3 rounded-full`} radius="full"/>
                     <Input label="Email" errorMessage={validated.email ? "Please Enter an email" : ""} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} isInvalid={validated.email} name="email" className={`my-3 me-3 rounded-full`} radius="full"/>
@@ -129,10 +128,6 @@ export default function page() {
                 <SInput name="image" onChange={(e) => handlechange(e)} id="picture" type="file" />
                 <Button disabled={isPending} variant="shadow" color="primary" onClick={handlesubmit} className="w-full my-4 rounded-full">Registre</Button>
             </div>
-            <div className="flex-1 bg-black w-full">
-
-            </div>
-        </div>
         
     </div>
   )

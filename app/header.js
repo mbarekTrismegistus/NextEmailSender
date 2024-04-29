@@ -7,7 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import {Avatar} from "@nextui-org/react";
 import ThemeSwitcher from "./components/themeSwitcher";
 import Link from "next/link";
-import { BoxArrowLeft, CodeSlash, Envelope } from "react-bootstrap-icons";
+import { BoxArrowLeft, ClockFill, CodeSlash, Envelope } from "react-bootstrap-icons";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function Header() {
           className="sm:hidden"
         />
       <NavbarBrand className="max-w-[100%]">
-        <p className="font-bold text-inherit">Email Sender</p>
+        <Link href={"/"} className="font-bold text-inherit">Email Sender</Link>
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">
@@ -50,6 +50,11 @@ export default function Header() {
             <DropdownItem className="py-3" endContent={<CodeSlash size={20}/>}>
               <Link href={'/rawhtml'}>
                 Send Email With HTML
+              </Link>
+            </DropdownItem>
+            <DropdownItem className="py-3" endContent={<ClockFill size={20}/>}>
+              <Link href={'/schedule'}>
+                Schedule an Email
               </Link>
             </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={signOut} className="py-3" endContent={<BoxArrowLeft size={20}/>}>

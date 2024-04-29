@@ -33,7 +33,7 @@ export async function POST(request) {
 
     await prisma.email.create({
         data: {
-            template: "1",
+            template: data.data.template || "Html",
             sender: session.user.email,
             recievers: data.data.emails,
             userId: Number(session.user.id)

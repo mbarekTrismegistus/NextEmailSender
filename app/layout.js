@@ -5,6 +5,7 @@ import TanstackProvider from "@/tanstackProvider";
 import { Providers } from "./providerNextUi";
 import Header from "./header";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from 'nextjs-toploader';
 import ScriptSpline from "./script";
 
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
     <TanstackProvider>
         <html lang="en">
           <body className="bg-bgImage">
+            <NextTopLoader showSpinner={false}/>
             <SessionProvider>
               <Providers>
                 <Header/>

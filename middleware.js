@@ -11,12 +11,12 @@ export default async function middleware(req){
         }
     }
     else{
-      return NextResponse.redirect(process.env.BASE_URL)
+      return NextResponse.redirect(`${process.env.BASE_URL}/api/auth/signin`)
     }
 
 
 }
 
 export const config = {
-  matcher: ['/dashboard','/dashboard/:path*','/emails/:path*','/rawhtml'],
+  matcher: ['/dashboard','/dashboard/:path*','/emails/:path*','/rawhtml','/'],
 }
