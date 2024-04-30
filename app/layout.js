@@ -7,6 +7,9 @@ import Header from "./header";
 import { SessionProvider } from "next-auth/react";
 import NextTopLoader from 'nextjs-toploader';
 import ScriptSpline from "./script";
+import localFont from 'next/font/local'
+
+const myFont = localFont({ src: '../public/Manrope.ttf' })
 
 
 export const metadata = {
@@ -20,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <TanstackProvider>
         <html lang="en">
-          <body className="bg-bgImage">
+          <body className={`bg-bgImage ${myFont.className}`}>
             <NextTopLoader showSpinner={false}/>
             <SessionProvider>
               <Providers>

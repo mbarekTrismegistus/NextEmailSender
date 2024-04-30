@@ -16,8 +16,8 @@
 
   }
   body {
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: contain;
+    background-repeat: repeat;
     background-attachment: fixed;
     min-height: 100vh;
     color: rgb(var(--foreground-rgb));
@@ -105,3 +105,6 @@
   animation-duration: 5s!important;
 }
 
+.hero{
+  line-height: 3.5rem!important;
+}
