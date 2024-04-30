@@ -23,7 +23,7 @@ export default function Mainemail() {
             let html = render(email)
             await axios.post("/api/sendemail" , { data: {
                 html: html,
-                emails: ["brosmedia631@gmail.com"]
+                emails: ["cns2023bros@gmail.com"]
             } })
         },
         onSuccess: () => {

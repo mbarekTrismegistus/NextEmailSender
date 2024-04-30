@@ -6,17 +6,19 @@
 
   :root {
     --foreground: black;
-    --background: url('/bglight.jpg');
+    --background: url('/bg.jpg');
     --background-color: #ffffff;
   }
   .dark {
-    --background: url('/bg.png');
+    --background: url('/bg.jpg');
     --foreground: white;
     --background-color: #1b1b1b;
 
   }
   body {
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     color: rgb(var(--foreground-rgb));
   

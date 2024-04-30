@@ -22,7 +22,7 @@ import { useRef, useState } from 'react';
 import { EditIcon } from '@/app/components/editIcon';
 
 
-export default function UsersList() {
+export default function ScheduleList() {
 
     const queryClient = useQueryClient()
     const toast = useRef(null);
@@ -43,9 +43,9 @@ export default function UsersList() {
 
 
     const {data, isFetching, isLoading, isError} = useQuery({
-        queryKey: ['users'],
+        queryKey: ['schedule'],
         queryFn: async () => {
-          const { data } = await axios.post("/api/getUsers")
+          const { data } = await axios.post("/api/getSchedule")
           return data.data
         }
     })
@@ -74,7 +74,7 @@ export default function UsersList() {
       }
       
     })
-    
+
 
     
     return (
@@ -89,20 +89,20 @@ export default function UsersList() {
           <Table classNames={{
               base: "max-h-[300px] overflow-y-scroll"}} aria-label="Example static collection table">
               <TableHeader>
-                <TableColumn>Name</TableColumn>
-                <TableColumn>Email</TableColumn>
-                <TableColumn>SMTP Password</TableColumn>
-                <TableColumn>Role</TableColumn>
+                <TableColumn>Sender</TableColumn>
+                <TableColumn>Receivers</TableColumn>
+                <TableColumn>Date</TableColumn>
+                <TableColumn>Template</TableColumn>
                 <TableColumn>Actions</TableColumn>
               </TableHeader>
               <TableBody loadingContent={"loading"} loadingState={isFetching || isPending ? <Spinner color='primary'/> : "idle"}>
                 {data.map((e) => {
                   return(
                     <TableRow key={e.id}>
-                      <TableCell className='flex items-center gap-3'><Avatar size='lg' src={e.image}/>{e.name}</TableCell>
-                      <TableCell>{e.email}</TableCell>
-                      <TableCell>{e.smptpass}</TableCell>
-                      <TableCell>{e.role}</TableCell>
+                      <TableCell className='flex items-center gap-3'>{e.sender}</TableCell>
+                      <TableCell>{e.recievers.join(" - ")}</TableCell>
+                      <TableCell>{`${e.date.substring(0, 10)}`}</TableCell>
+                      <TableCell>{e.template}</TableCell>
                       <TableCell>
                         <div className='relative flex items-center gap-2'>
                           <Button variant="outline" onPress={() => {

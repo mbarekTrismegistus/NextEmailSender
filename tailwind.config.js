@@ -30,7 +30,7 @@ module.exports = {
       light: {
         colors: {
           primary: {
-            DEFAULT: "#090F4F",
+            DEFAULT: "#e20e28",
             foreground: "#000000",
           },
           focus: "#4361EE",
@@ -40,7 +40,7 @@ module.exports = {
       dark: {
         colors: {
           primary: {
-            DEFAULT: "#e20e28",
+            DEFAULT: "#e01d35",
             foreground: "#000000",
           },
           focus: "#4895EF",

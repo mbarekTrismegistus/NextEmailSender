@@ -50,7 +50,7 @@ export default function EmailsList() {
         isLoading 
         ? 
 
-          <Skeleton className="mt-[30px] rounded-lg">
+          <Skeleton className="mt-[30px] rounded-lg before:!duration-1000">
             <div className="h-[200px] rounded-lg bg-default-300"></div>
           </Skeleton>
 
@@ -58,7 +58,7 @@ export default function EmailsList() {
         <Table
             topContent={
               isUsersLoading ? 
-              <Skeleton className='rounded-xl w-full h-full'/>
+              <Skeleton className='rounded-xl w-full h-full before:!duration-1000'/>
               :
               <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
                   <SelectItem key={"all"} value={undefined}>

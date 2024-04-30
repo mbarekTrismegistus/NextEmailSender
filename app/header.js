@@ -28,7 +28,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">
         <NavbarItem>
           
-        {session.data == undefined ? session.status == "loading" ? <Skeleton className="rounded-full w-[40px] h-[40px]"/> : 
+        {session.data == undefined ? session.status == "loading" ? <Skeleton className="rounded-full w-[40px] h-[40px] before:!duration-1000"/> : 
         <div>
           <Button color="primary" variant="bordered" className="mx-2"><Link href="/api/auth/signin">Login</Link></Button> 
         </div>
@@ -80,7 +80,7 @@ export default function Header() {
       </NavbarContent>
       <NavbarMenu className="dark">
             <NavbarMenuItem>
-                {session.data == undefined ? session.status == "loading" ? <Skeleton className="rounded-full w-[40] h-[40]"/> : "no session" : <Avatar isBordered color="primary" src={`${session.data.user.image}`}/>}
+                {session.data == undefined ? session.status == "loading" ? <Skeleton className="rounded-full w-[40] h-[40] before:!duration-1000"/> : "no session" : <Avatar isBordered color="primary" src={`${session.data.user.image}`}/>}
             </NavbarMenuItem>
 
 

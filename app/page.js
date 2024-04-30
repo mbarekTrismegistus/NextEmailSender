@@ -10,8 +10,7 @@ export default async function page() {
     <>
         <div className="text-center md:text-start flex-col-reverse md:flex-row flex mt-[30%] md:mt-[8vw] md:ps-[120px] px-[80px] items-center">
             <div className="flex-1">
-                    <h1 className="text-3xl md:text-7xl font-bold mb-[15px] hero-text">Send Emails Easily to anyone, as u wish</h1>
-                    <p className="">Send Emails in Html, or choose a template that fit your needs</p>
+                    <h1 className="text-3xl md:text-5xl font-bold mb-[15px]">Streamline client communication effortlessly with BrosMedia's email services.</h1>
                     <div className="mt-[30px]">
                         {session ?
                         <div>
@@ -35,8 +34,8 @@ export default async function page() {
                         }
                     </div>
             </div>
-            <div className="flex-1 min-h-[300px] min-w-[400px] flex md:h-[400px] md:min-w-[500px] items-center justify-content-center">
-                <spline-viewer className="flex items-center" id="spline" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" style={{width:"100%", height:"100%"}} ></spline-viewer>        
+            <div className="flex-1 min-h-[300px] min-w-[450px] flex md:h-[400px] md:min-w-[500px] items-center justify-content-center">
+                <spline-viewer className="flex items-center" id="spline" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/W1IuSjc6919Nzu6j/scene.splinecode" style={{width:"150%", height:"150%"}} ></spline-viewer>        
             </div>
         </div>
     </>

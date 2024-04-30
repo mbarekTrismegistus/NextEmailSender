@@ -9,6 +9,7 @@ import axios from 'axios';
 import EmailsList from './components/emailsList';
 import UsersList from './components/usersList';
 import { ClockFill, EnvelopeFill, FileEarmarkRichtextFill, FiletypeHtml } from 'react-bootstrap-icons';
+import ScheduleList from './components/scheduleList';
 
 
 export default function page() {
@@ -288,6 +289,10 @@ export default function page() {
           <p className="md:text-xl mt-[40px] mb-[30px]">Users</p>
 
           <UsersList/>
+
+          <p className="md:text-xl mt-[40px] mb-[30px]">Waiting List</p>
+
+          <ScheduleList/>
           
             
         </div>

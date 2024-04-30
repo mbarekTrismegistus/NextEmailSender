@@ -24,7 +24,7 @@ export default function ThemeSwitcher() {
     )
   }
   else{
-    return <Skeleton className="flex rounded-full w-[48px] h-[28px]"/>
+    return <Skeleton className="flex rounded-full w-[48px] h-[28px] before:!duration-1000"/>
   }
 
 

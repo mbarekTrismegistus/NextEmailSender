@@ -68,7 +68,7 @@ export default function RawHtmlSender() {
                 extensions={htmlLang()}
               />
             :
-            <Skeleton className='max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl '/>
+            <Skeleton className='max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl before:!duration-1000'/>
             }
         </div>
       

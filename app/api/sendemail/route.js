@@ -4,32 +4,26 @@ import nodemailer from 'nodemailer';
 import prisma from '@/prisma/client';
 import { auth } from '@/auth/auth';
 
+const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
 
 export async function POST(request) {
     
     let data = await request.json()
     let session = await auth()
 
-
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: session.user.email,
-            pass: session.user.smptpass,
-        },
-        tls: {
-            ciphers:'SSLv3'
-        }
+    let res = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+            from: "Contact@brosmedia.ma",
+            to: ["cns2023bros@gmail.com"],
+            subject: "hello world",
+            html: data.data.html,
+            }),
     });
-
-    const options = {
-        "from": session.user.email,
-        "to": data.data.emails,
-        "subject": "helloo",
-        "html": data.data.html
-    }
 
     await prisma.email.create({
         data: {
@@ -40,7 +34,6 @@ export async function POST(request) {
         }
     })
 
-    await transporter.sendMail(options)
 
     return NextResponse.json({message: "ok"})
 
