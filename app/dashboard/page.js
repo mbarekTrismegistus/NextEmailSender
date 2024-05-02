@@ -144,14 +144,14 @@ export default function page() {
       <p className="md:text-5xl font-bold mb-[40px] hero-text">Dashboard</p>
       {isLoading || isLoadingStats ? 
         <div className='flex items-center justify-center'>
-          <l-trefoil
+          <l-spiral
             size="80"
             stroke="4"
             stroke-length="0.15"
             bg-opacity="0.1"
             speed="1.4"
-            color="white" 
-          ></l-trefoil> 
+            color="white"
+          ></l-spiral> 
       
         </div>
         : 
@@ -159,8 +159,8 @@ export default function page() {
         <div className='w-[100%]'>
           <p className="md:text-xl">Statistics</p>
           <div className='lg:flex gap-4 items-stretch'>
-            <Table className='flex-1 mt-5' hideHeader topContent={
-              
+            <Table className='flex-1 mt-5 relative' hideHeader topContent={
+                
                 <Select label="Data Range" placeholder="Select a range" onChange={handleSelectChange} selectedKeys={[selectValue]}>
                       <SelectItem key={"lastWeek"} value={"lastWeek"}>
                         Last Week
@@ -174,6 +174,7 @@ export default function page() {
                 </Select>
             
             }>
+      
               <TableHeader>
                 <TableColumn>
                   Chart

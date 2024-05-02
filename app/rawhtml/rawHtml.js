@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import {Button, Skeleton} from "@nextui-org/react";
+import {Button, Input, Skeleton} from "@nextui-org/react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { githubLight } from '@uiw/codemirror-theme-github';
@@ -15,6 +15,7 @@ import axios from 'axios';
 
 export default function RawHtmlSender() {
   const [html, setHtml] = useState('');
+  const [subject, setSubject] = useState('')
   const [selected, setSelected] = useState([]);
   const [isMounted, setIsMounted] = useState(false)
   const toast = useRef(null);
@@ -25,7 +26,8 @@ export default function RawHtmlSender() {
     mutationFn: async() => {
       await axios.post("/api/sendemail" , { data: {
         html: html,
-        emails: selected
+        emails: selected,
+        subject: subject
       }})
     },
     onSuccess: () => {
@@ -45,26 +47,33 @@ export default function RawHtmlSender() {
   
   return (
     <div className='mx-auto md:p-[50px] p-[30px] md:px-[120px]'>
-      <h1 className='font-bold text-5xl text-center my-3 hero-text'>Send Email using html</h1>
+      <h1 className='font-bold text-5xl text-center py-5 leading-12 hero-text'>Send Email using html</h1>
       <Toast ref={toast} />
-      <TagsInput
-        value={selected}
-        onChange={setSelected}
-        name=""
-        placeHolder="Enter Emails"
-        classNames={"emails"}
-        
-        
-      />
+      <div className='gap-4 mt-[30px] mb-[30px] items-center'>
+        <div>
+          <p className='mb-4 mt-[30px] ms-2 text-xl font-bold'>Emails</p>
+          <TagsInput
+            value={selected}
+            onChange={setSelected}
+            name=""
+            placeHolder="Enter Emails"
+          />
+        </div>
+        <div>
+          <p className='mb-3 mt-[30px] ms-2 text-xl font-bold'>Subject</p>
+          <Input label="subject" size='sm' onChange={(e) => setSubject(e.target.value)} value={subject} classNames={{inputWrapper: "border-1 dark:border-zinc-600 border-zinc-700"}} variant='bordered' radius='full' name='subject'/>
+        </div>
+          
+      </div>
 
         <div className='min-h-[400px]'>
-            <p>Write your code here :</p>
+            <p className='mb-4'>Write your code here :</p>
             {isMounted ? 
               <CodeMirror
                 value={html}
-                theme={theme == "dark" ? dracula : githubLight}
+                theme={dracula}
                 onChange={(e) => setHtml(e)}
-                className="max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl text-[16px] cm-scrollbar"
+                className="max-h-[400px] min-h-[400px] border-1 border-slate-500 dark:border-slate-700 overflow-y-scroll rounded-xl text-[16px] cm-scrollbar"
                 extensions={htmlLang()}
               />
             :

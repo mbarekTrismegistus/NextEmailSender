@@ -90,8 +90,6 @@ export default function UsersList() {
               base: "max-h-[300px] overflow-y-scroll"}} aria-label="Example static collection table">
               <TableHeader>
                 <TableColumn>Name</TableColumn>
-                <TableColumn>Email</TableColumn>
-                <TableColumn>SMTP Password</TableColumn>
                 <TableColumn>Role</TableColumn>
                 <TableColumn>Actions</TableColumn>
               </TableHeader>
@@ -100,8 +98,6 @@ export default function UsersList() {
                   return(
                     <TableRow key={e.id}>
                       <TableCell className='flex items-center gap-3'><Avatar size='lg' src={e.image}/>{e.name}</TableCell>
-                      <TableCell>{e.email}</TableCell>
-                      <TableCell>{e.smptpass}</TableCell>
                       <TableCell>{e.role}</TableCell>
                       <TableCell>
                         <div className='relative flex items-center gap-2'>

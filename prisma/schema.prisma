@@ -19,8 +19,6 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   name String @unique
-  email String
-  smptpass String
   password  String
   role String
   image String
@@ -32,6 +30,7 @@ model Email {
   id Int @id @default(autoincrement())
   dateSend DateTime @default(now())
   template String
+  subject String
   sender String
   recievers String[]
   user User @relation(fields: [userId], references: [id])
@@ -45,6 +44,7 @@ model Schedule {
   template String @default("")
   sender String
   recievers String[]
+  subject String
   isSent Boolean
   user User @relation(fields: [userId], references: [id])
   userId Int

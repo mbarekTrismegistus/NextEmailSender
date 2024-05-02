@@ -10,20 +10,27 @@ export async function POST(request) {
 
 
         // let hashedpass = await hash(Data.data.data.password,10)
-        let base64img = Data.data.image.substr(Data.data.image.indexOf(',') + 1);
+        let base64img
+        let imgdata
 
-        const options = {
-            apiKey: "b89e645579bd4ed0af6eea6394c431cd", 
-            base64string: base64img,
-          };
-    
-    
-        let imgdata = await imgbbUploader(options)
+        if(Data.data.image){
+            base64img = Data.data.image.substr(Data.data.image.indexOf(',') + 1);
+            const options = {
+                apiKey: "b89e645579bd4ed0af6eea6394c431cd", 
+                base64string: base64img,
+              };
+        
+        
+            imgdata = await imgbbUploader(options)
+        }
+        
+
+        
 
         await prisma.user.create({
             data: {
                 ...Data.data,
-                image: imgdata.url,
+                image: imgdata.url || undefined,
                 role: "user"
             }
         })

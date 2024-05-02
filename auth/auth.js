@@ -59,8 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return {
           ...token,
           id: user.id,
-          role: user.role,
-          smptpass: user.smptpass
+          role: user.role
         }
       }
       return token
@@ -70,8 +69,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user = {
         ...session.user,
         id: token.id,
-        role: token.role,
-        smptpass: token.smptpass
+        role: token.role
         
       }
       return session

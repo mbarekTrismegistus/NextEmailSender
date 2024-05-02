@@ -14,7 +14,7 @@ export async function POST(request) {
             where: {
                 OR: [
                     {
-                        template: "Html"
+                        template: "html"
                     }
                 ]
             }
@@ -23,7 +23,7 @@ export async function POST(request) {
             where: {
                 NOT: [
                     {
-                        template: "Html"
+                        template: "html"
                     }
                 ]
             }

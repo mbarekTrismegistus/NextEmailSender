@@ -1,56 +1,26 @@
-"use client"
-
-import React, { useState } from 'react'
-import { Html, Button, Heading, Row, Column, Tailwind, Body, Container, Text, Section, Img } from "@react-email/components";
-import { Button as ButtonUi } from '@nextui-org/react';
-import { useMutation } from '@tanstack/react-query';
-import { render } from '@react-email/render';
-import axios from 'axios';
-import Email from '@/emails/main';
+import { Html, Button, Heading, Row, Img, Column, Tailwind, Body, Container, Text, Section } from "@react-email/components";
 
 
-
-export default function Mainemail() {
-
-    const [text, setText] = useState("")
-    const [Color, setColor] = useState("#222222")
-
-    const email = <Html lang="en" dir="ltr"><Email text={text} color={Color}/></Html>
-
-
-    const {mutate: send} = useMutation({
-        mutationFn: async() => {
-            let html = render(email)
-            await axios.post("/api/sendemail" , { data: {
-                html: html,
-                emails: ["cns2023bros@gmail.com"]
-            } })
-        },
-        onSuccess: () => {
-            console.log("done")
-        }
-
-    })
-
+export default function Email(props){
   return (
-    <div>
-        <input onChange={(e) => setText(e.target.value)}/>
-        <input type='color' onChange={(e) => setColor(e.target.value)}/>
-      <Tailwind>
-        <Container className={`border border-solid rounded bg-[${Color}] border-[#eaeaea] mx-auto my-5 max-w-[500px]`}>
+    
+         <Tailwind>
+            <Container className={`border border-solid rounded bg-[${props.Color || "#ffffff"}] border-[#eaeaea] mx-auto my-5 max-w-[500px]`}>
                 <Section>
                     <Row className="p-[15px] bg-[#0A0F4F]">
                         <Column>
-                            <Img src="logo.webp" alt="Cat" width="200" />
+                            <Img src="https://brosmedia41a4.b-cdn.net/wp-content/uploads/2023/10/logo.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma" alt="Cat" width="200" />
                         </Column>
                         <Column className='text-end'>
+                            
                             <Button href='#' className='bg-[#CF1C1C] py-2 px-4 m-3 text-white'>
                                 Contact
                             </Button>
+                            
                         </Column>
                     </Row>
                 </Section>
-                <Section style={{backgroundImage: "url('bg.jpg')",  backgroundSize: "cover"}} className="p-5">
+                <Section style={{backgroundImage: "url('https://brosmedia41a4.b-cdn.net/wp-content/uploads/2023/10/background-1.jpg?bv_host=brosmedia.ma')",  backgroundSize: "cover"}} className="p-5">
                     <Row className=''>
                         <Text className="text-white text-4xl font-extrabold text-center pt-[40px]">BrosMedia</Text>
                         <Text className="text-white text-xl text-center px-5 pt-3 pb-5">
@@ -61,7 +31,7 @@ export default function Mainemail() {
                 <Section className="bg-white pt-5"> 
                     <Row>
                         <Column className='text-center p-3 pt-[30px] px-[12px]'>
-                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'/>
+                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma' width={"100%"}/>
                             <Section>
                                 <Text className='text-black font-black m-0 mb-3 text-xl'>ATTAQUE DE LA REINE</Text>
                                 <Row>
@@ -91,7 +61,7 @@ export default function Mainemail() {
                             </Section>
                         </Column>
                         <Column className='text-center p-3 pt-[30px] px-[12px]'>
-                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'/>
+                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/2-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'  width={"100%"}/>
                             <Section>
                                 <Text className='text-black font-black m-0 mb-3 text-xl'>ATTAQUE DE LA REINE</Text>
                                 <Row>
@@ -121,7 +91,7 @@ export default function Mainemail() {
                             </Section>
                         </Column>
                         <Column className='text-center p-3 pt-[30px] px-[12px]'>
-                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/1-1-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma'/>
+                            <Img src='https://brosmedia41a4.b-cdn.net/wp-content/uploads/2024/01/33-1024x933.jpg.bv_resized_desktop.jpg.bv.webp?bv_host=brosmedia.ma' width={"100%"}/>
                             <Section>
                                 <Text className='text-black font-black m-0 mb-3 text-xl'>ATTAQUE DE LA REINE</Text>
                                 <Row>
@@ -151,8 +121,8 @@ export default function Mainemail() {
                             </Section>
                         </Column>
                     </Row>
-                    <Row className='w-[80%]'>
-                        <Button href='#' className='block bg-[#CF1C1C] py-3 text-center'>
+                    <Row>
+                        <Button href='https://brosmedia.ma/community-manager-maroc/' className='block bg-[#CF1C1C] py-3 mx-5 text-center'>
                             See More
                         </Button>
                     </Row>
@@ -160,9 +130,6 @@ export default function Mainemail() {
                 </Section>
             </Container>
       </Tailwind>
-      <ButtonUi color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</ButtonUi>
 
-    </div>
-        
-  )
-}
+  );
+};

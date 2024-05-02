@@ -8,7 +8,8 @@ export async function POST(request) {
     await prisma.schedule.create({
         data: {
             ...data.data,
-            isSent: false
+            isSent: false,
+            template: data.data.template || "html"
         }
     })
 

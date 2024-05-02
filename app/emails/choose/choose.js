@@ -2,6 +2,7 @@
 
 import { Button } from "@nextui-org/react";
 import Email from "@/emails/main";
+import New from "@/emails/new";
 import { Tabs } from "../../components/tabs";
 import { useState } from "react";
 import Link from "next/link";
@@ -12,21 +13,23 @@ export default function Choose() {
     const tabs = [
         {
           title: "mainmail",
-          value: "product",
+          value: "mainmail",
           content: (
-            <div className="w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 text-white bg-gradient-to-br from-purple-700 to-violet-900 scrollbar">
+            <div className="w-full overflow-hidden h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar relative">
+              <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
               <p className="text-2xl font-bold">Product Tab</p>
               <Email/>
             </div>
           ),
         },
         {
-          title: "Services",
-          value: "services",
+          title: "new",
+          value: "new",
           content: (
-            <div className="w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 text-white bg-gradient-to-br from-purple-700 to-violet-900 scrollbar">
-              <p>Services tab</p>
-              <Email/>
+            <div className="relative w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar">
+              <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
+              <p className="text-2xl font-bold">Services tab</p>
+              <New/>
             </div>
           ),
         },
@@ -34,8 +37,9 @@ export default function Choose() {
           title: "Playground",
           value: "playground",
           content: (
-            <div className="w-full overflow-hidden relative h-full overflow-scroll rounded-2xl p-10 text-white bg-gradient-to-br from-purple-700 to-violet-900 scrollbar">
-              <p>Playground tab</p>
+            <div className="w-full overflow-hidden relative h-full overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar">
+              <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
+              <p className="text-2xl font-bold">Playground tab</p>
               <Email/>
             </div>
           ),
@@ -48,7 +52,7 @@ export default function Choose() {
             <Tabs tabs={tabs} choose={setTemplate} activeTabClassName={"text-black"}/>
             
         </div>
-        <Link href={`emails/${template || "mainmail"}`}>
+        <Link href={`/emails/${template || "main"}`}>
             <Button className="mx-auto" color="primary" variant="shadow">
                 Choose
             </Button>

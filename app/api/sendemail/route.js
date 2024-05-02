@@ -1,6 +1,5 @@
 
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
 import prisma from '@/prisma/client';
 import { auth } from '@/auth/auth';
 
@@ -18,19 +17,20 @@ export async function POST(request) {
             Authorization: `Bearer ${RESEND_API_KEY}`,
             },
             body: JSON.stringify({
-            from: "Contact@brosmedia.ma",
-            to: ["cns2023bros@gmail.com"],
-            subject: "hello world",
+            from: process.env.MAIN_MAIL,
+            to: data.data.emails,
+            subject: data.data.subject,
             html: data.data.html,
             }),
     });
 
     await prisma.email.create({
         data: {
-            template: data.data.template || "Html",
-            sender: session.user.email,
+            template: data.data.template || "html",
+            sender: session.user.name,
             recievers: data.data.emails,
-            userId: Number(session.user.id)
+            userId: Number(session.user.id),
+            subject: data.data.subject || "no subject"
         }
     })
 

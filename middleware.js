@@ -6,7 +6,7 @@ export default async function middleware(req){
     const session = await auth()
     
     if(session){
-        if (session.user.role !== "admin" && req.nextUrl.pathname.startsWith("/dashboard")) {
+        if (session.user.role !== "admin" && ( req.nextUrl.pathname.startsWith("/dashboard") || req.nextUrl.pathname.startsWith("/registre"))) {
           return NextResponse.redirect(process.env.BASE_URL)
         }
     }
@@ -18,5 +18,5 @@ export default async function middleware(req){
 }
 
 export const config = {
-  matcher: ['/dashboard','/dashboard/:path*','/emails/:path*','/rawhtml','/'],
+  matcher: ['/dashboard','/dashboard/:path*','/emails/:path*','/rawhtml','/','/registre','/schedule'],
 }

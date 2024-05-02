@@ -32,20 +32,17 @@ export async function POST(request) {
             Authorization: `Bearer ${RESEND_API_KEY}`,
             },
             body: JSON.stringify({
-            from: "Acme <onboarding@resend.dev>",
-            to: ["momoboogeyman2000@gmail.com"],
+            from: "Contact@brosmedia.ma",
+            to: data.data.recievers,
             subject: "hello world",
             html: html,
             }),
         });
 
 
-    await prisma.schedule.update({
+    await prisma.schedule.delete({
         where: {
             id: data.data.id
-        },
-        data: {
-            isSent: true
         }
     })
   

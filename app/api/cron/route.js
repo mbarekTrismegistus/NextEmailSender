@@ -1,22 +1,30 @@
 import prisma from '@/prisma/client'
 import nodemailer from 'nodemailer'
+import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0
 
-const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
 
-
-export async function GET() {
+export async function GET(request) {
+    const authHeader = request.headers.get('authorization');
+    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+        return new Response('Unauthorized', {
+        status: 401,
+        });
+    }
 
     let d = await prisma.schedule.findMany({
         include: {
             user: true
         },
         where: {
-            isSent: false
+            isSent: false,
+            date: {
+                lte: today(getLocalTimeZone()).toDate(),
+            }
         }
     })
 
