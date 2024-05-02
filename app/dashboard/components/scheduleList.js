@@ -99,7 +99,7 @@ export default function ScheduleList() {
                 {data.map((e) => {
                   return(
                     <TableRow key={e.id}>
-                      <TableCell className='flex items-center gap-3'>{e.sender}</TableCell>
+                      <TableCell className='flex items-center gap-3'>{e.user.name}</TableCell>
                       <TableCell>{e.recievers.join(" - ")}</TableCell>
                       <TableCell>{`${e.date.substring(0, 10)}`}</TableCell>
                       <TableCell>{e.template}</TableCell>

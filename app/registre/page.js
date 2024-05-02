@@ -14,8 +14,6 @@ export default function page() {
 
     const [validated, setValidated] = useState({
         name: false,
-        email:false,
-        smptpass:false,
         password:false
     })
     const toast = useRef(null);
@@ -72,12 +70,10 @@ export default function page() {
 
     const {mutate: handlesubmit, isPending} = useMutation({
         mutationFn: async () => {
-            if(validated.name || validated.email || validated.password || validated.smptpass || data?.name == undefined || data?.email == undefined || data?.smptpass == undefined || data?.password == undefined){
+            if(validated.name || validated.password || data?.name == undefined || data?.password == undefined){
                 setValidated({
                     name: validated.name ? true : false,
-                    email: validated.email ? true : false,
                     password: validated.password ? true : false,
-                    smptpass: validated.smptpass ? true : false,
                 })
                 alert('validate')
             }
@@ -98,12 +94,7 @@ export default function page() {
         <Toast ref={toast} />
         <h1 className="text-3xl md:text-6xl font-bold mb-[35px] hero-text">Create An Account</h1>
             <div className="px-4 w-[60%] mx-auto">
-                <div className="flex">
-                    <Input label="Name" errorMessage={validated.name ? "Please Enter a name" : ""} isInvalid={validated.name} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} name="name" className={`my-3 me-3 rounded-full`} radius="full"/>
-                    <Input label="Email" errorMessage={validated.email ? "Please Enter an email" : ""} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} isInvalid={validated.email} name="email" className={`my-3 me-3 rounded-full`} radius="full"/>
-                </div>
-                
-                <Input label="SMTP Password" errorMessage={validated.smptpass ? "Please Enter your SMTP pass" : ""} isInvalid={validated.smptpass} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} name="smptpass" className={`my-3 me-3 rounded-full`} radius="full"/>
+                <Input label="Name" errorMessage={validated.name ? "Please Enter a name" : ""} isInvalid={validated.name} onChange={(e) => handlechange(e)} onBlur={(e) => handlechange(e)} name="name" className={`my-3 me-3 rounded-full`} radius="full"/>
                 <Input
                     label="Password"
                     placeholder="Enter your password"

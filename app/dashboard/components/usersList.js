@@ -131,26 +131,6 @@ export default function UsersList() {
                                           name='name'
                                           onChange={(e) => handleUserData(e)}
                                         />
-
-                                        <Input
-                                          autoFocus
-                                          label="Email"
-                                          placeholder="Enter email"
-
-                                          variant="bordered"
-                                          name='email'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
-
-                                        <Input
-                                          autoFocus
-                                          label="SMTP Pass"
-                                          placeholder="Enter SMTP Password"
-
-                                          variant="bordered"
-                                          name='smptpass'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
                                         
                                         <Input
                                           label="Password"
@@ -180,7 +160,7 @@ export default function UsersList() {
                                           onClose()
                                           handleUpdate()
                                         }}>
-                                          Sign in
+                                          Update
                                         </Button>
                                       </ModalFooter>
                                     </>

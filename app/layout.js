@@ -5,7 +5,6 @@ import TanstackProvider from "@/tanstackProvider";
 import { Providers } from "./providerNextUi";
 import Header from "./header";
 import { SessionProvider } from "next-auth/react";
-import NextTopLoader from 'nextjs-toploader';
 import localFont from 'next/font/local'
 
 const myFont = localFont({ src: '../public/Manrope.ttf' })
@@ -23,7 +22,6 @@ export default function RootLayout({ children }) {
     <TanstackProvider>
         <html lang="en">
           <body className={`dark:bg-bgImage ${myFont.className}`}>
-            <NextTopLoader showSpinner={false}/>
             <SessionProvider>
               <Providers>
                 <Header/>

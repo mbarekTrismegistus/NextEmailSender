@@ -35,7 +35,7 @@ export async function POST(request) {
     })
 
 
-    return NextResponse.json({message: "ok"})
+    return NextResponse.json({message: "ok"}, {status: res.status})
 
     
 }

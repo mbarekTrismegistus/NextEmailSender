@@ -14,6 +14,7 @@ export default function page(params) {
 
   const [selected, setSelected] = useState([]);
   const [isMounted, setMounted] = useState(false)
+  const [subject, setSubject] = useState("")
 
   const toast = useRef(null);
 
@@ -34,7 +35,9 @@ export default function page(params) {
           let html = render(email)
           await axios.post("/api/sendemail" , { data: {
               html: html,
-              emails: selected
+              emails: selected,
+              subject: subject,
+              template: params.params.mailname
           } })
       },
       onSuccess: () => {
@@ -59,7 +62,7 @@ export default function page(params) {
             placeHolder="Enter Emails"
           />
           <p className='my-4 ms-2'>Subject</p>
-          <Input size='sm' label="Subject" name='subject' radius='full' classNames={{inputWrapper: "border-1 border-zinc-500"}}/>
+          <Input size='sm' label="Subject" name='subject' onValueChange={setSubject} value={subject} radius='full' classNames={{inputWrapper: "border-1 border-zinc-500"}}/>
           <Button color='primary' isDisabled={isPending} isLoading={isPending} variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>Send</Button>
 
         </div>

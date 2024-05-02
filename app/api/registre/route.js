@@ -30,7 +30,7 @@ export async function POST(request) {
         await prisma.user.create({
             data: {
                 ...Data.data,
-                image: imgdata.url || undefined,
+                image: imgdata?.url || "",
                 role: "user"
             }
         })

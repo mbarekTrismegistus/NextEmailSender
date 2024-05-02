@@ -16,12 +16,12 @@ export default async function page() {
                     <div className="mt-[30px]">
                         {session ?
                         <div>
-                            <Link href={`choose`}>
+                            <Link href={`/emails/choose`}>
                                 <Button href="#" color="primary" variant="shadow" className="me-2 mt-5 rounded-full">
                                     Choose A Template
                                 </Button>
                             </Link>
-                            <Link href={`rawhtml`}>
+                            <Link href={`/rawhtml`}>
                                 <Button color="primary" variant="bordered" className="mx-2 dark:text-white text-black rounded-full">
                                     Raw HTML
                                 </Button>
