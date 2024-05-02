@@ -15,10 +15,15 @@ export default function Choose() {
           title: "mainmail",
           value: "mainmail",
           content: (
-            <div className="w-full overflow-hidden h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar relative">
+            <div className="w-full overflow-hidden h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar relative min-h-[500px]">
               <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
               <p className="text-2xl font-bold">Product Tab</p>
               <Email/>
+              <Link href={`/emails/main`} >
+                <Button className="mx-auto w-[100%]" color="primary" variant="shadow">
+                    Choose
+                </Button>
+              </Link>
             </div>
           ),
         },
@@ -26,10 +31,15 @@ export default function Choose() {
           title: "new",
           value: "new",
           content: (
-            <div className="relative w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar">
+            <div className="relative w-full overflow-hidden relative h-full mx-auto overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar min-h-[500px]">
               <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
               <p className="text-2xl font-bold">Services tab</p>
               <New/>
+              <Link href={`/emails/new`}>
+                <Button className="mx-auto w-[100%] mt-5" color="primary" variant="shadow">
+                    Choose
+                </Button>
+              </Link>
             </div>
           ),
         },
@@ -37,10 +47,15 @@ export default function Choose() {
           title: "Playground",
           value: "playground",
           content: (
-            <div className="w-full overflow-hidden relative h-full overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar">
+            <div className="w-full overflow-hidden relative h-full overflow-scroll rounded-2xl p-10 border border-1 border-zinc-800 bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-800 from-slate-50 to-slate-200 scrollbar min-h-[500px]">
               <div class="absolute right-0 top-0 h-px w-[300px] gradientLine"></div>
               <p className="text-2xl font-bold">Playground tab</p>
               <Email/>
+              <Link href={`/emails/email3`} className="mt-5">
+                <Button className="mx-auto w-[100%] mt-5" color="primary" variant="shadow">
+                    Choose
+                </Button>
+              </Link>
             </div>
           ),
         },
@@ -52,11 +67,7 @@ export default function Choose() {
             <Tabs tabs={tabs} choose={setTemplate} activeTabClassName={"text-black"}/>
             
         </div>
-        <Link href={`/emails/${template || "main"}`}>
-            <Button className="mx-auto" color="primary" variant="shadow">
-                Choose
-            </Button>
-        </Link>
+
     </div>
   )
 }

@@ -23,16 +23,17 @@ export async function POST(request) {
             html: data.data.html,
             }),
     });
-
-    await prisma.email.create({
-        data: {
-            template: data.data.template || "html",
-            sender: session.user.name,
-            recievers: data.data.emails,
-            userId: Number(session.user.id),
-            subject: data.data.subject || "no subject"
-        }
-    })
+    if(res.status == 200){
+        await prisma.email.create({
+            data: {
+                template: data.data.template || "html",
+                sender: session.user.name,
+                recievers: data.data.emails,
+                userId: Number(session.user.id),
+                subject: data.data.subject || "no subject"
+            }
+        })
+    }
 
 
     return NextResponse.json({message: "ok"}, {status: res.status})

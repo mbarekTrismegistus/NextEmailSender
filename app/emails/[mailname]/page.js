@@ -18,13 +18,11 @@ export default function page(params) {
 
   const toast = useRef(null);
 
-  const Mail = dynamic(() => import(`../../../emails/${params.params.mailname}`), { ssr: false })
-
-  useEffect(() => {
-    if(Mail){
-      setMounted(true)
-    }
-  },[])
+  const Mail = dynamic(() => import(`../../../emails/${params.params.mailname}`).catch(err => {
+    return () => <h1>Template not Found</h1>
+  }), { ssr: false, 
+    loading: () => <Skeleton className='h-[500px]'/>
+  })
 
   
   const email = <Html lang="en" dir="ltr"><Mail/></Html>
@@ -68,12 +66,7 @@ export default function page(params) {
         </div>
         <div className='max-h-[500px] flex-1 overflow-scroll scrollbar'>
           <p className='md:text-3xl font-bold mb-[30px] hero-text'>Template Display</p>
-          {
-            isMounted ?
-              <Mail/>
-            :
-            <Skeleton className='h-[500px]'/>
-          }
+          <Mail/>
         </div>
         
     </div>

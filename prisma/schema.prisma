@@ -33,7 +33,7 @@ model Email {
   subject String
   sender String
   recievers String[]
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }
 
@@ -46,6 +46,6 @@ model Schedule {
   recievers String[]
   subject String
   isSent Boolean
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }

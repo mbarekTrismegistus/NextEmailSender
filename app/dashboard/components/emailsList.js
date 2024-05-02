@@ -97,6 +97,7 @@ export default function EmailsList() {
               <TableColumn>Sender</TableColumn>
               <TableColumn>Receivers</TableColumn>
               <TableColumn>Template</TableColumn>
+              <TableColumn>Subject</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
             <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching ? "loading" : "idle"}>
@@ -106,6 +107,7 @@ export default function EmailsList() {
                     <TableCell>{e.user.name}</TableCell>
                     <TableCell>{e.recievers.join(" - ")}</TableCell>
                     <TableCell>{e.template}</TableCell>
+                    <TableCell>{e.subject}</TableCell>
                     <TableCell>{e.dateSend.substring(0, 10)}</TableCell>
                   </TableRow>
                 )

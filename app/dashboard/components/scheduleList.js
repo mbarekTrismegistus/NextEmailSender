@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Tooltip, Skeleton, Spinner, Avatar, Select, SelectItem} from "@nextui-org/react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input} from "@nextui-org/react";
+import {useDisclosure} from "@nextui-org/react";
 import axios from 'axios';
 import { DeleteIcon } from '@/app/components/DeleteIcon';
 import { useQueryClient } from '@tanstack/react-query';
@@ -19,7 +19,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useRef, useState } from 'react';
-import { EditIcon } from '@/app/components/editIcon';
 
 
 export default function ScheduleList() {
@@ -52,11 +51,11 @@ export default function ScheduleList() {
 
     const {mutate: handleDelete, isPending} = useMutation({
       mutationFn: async (id) => {
-        await axios.post("/api/deleteUser", { data: id})
+        await axios.post("/api/deleteSchedule", { data: id})
       },
       onSuccess: () => {
-        toast.current.show({ severity: 'info', summary: 'Info', detail: 'User Deleted !' });
-        queryClient.invalidateQueries("users")
+        toast.current.show({ severity: 'info', summary: 'Info', detail: 'Scheduled email Deleted !' });
+        queryClient.invalidateQueries("schedule")
       }
       
     })
@@ -92,6 +91,7 @@ export default function ScheduleList() {
                 <TableColumn>Sender</TableColumn>
                 <TableColumn>Receivers</TableColumn>
                 <TableColumn>Date</TableColumn>
+                <TableColumn>Subject</TableColumn>
                 <TableColumn>Template</TableColumn>
                 <TableColumn>Actions</TableColumn>
               </TableHeader>
@@ -102,99 +102,14 @@ export default function ScheduleList() {
                       <TableCell className='flex items-center gap-3'>{e.user.name}</TableCell>
                       <TableCell>{e.recievers.join(" - ")}</TableCell>
                       <TableCell>{`${e.date.substring(0, 10)}`}</TableCell>
+                      <TableCell>{e.subject}</TableCell>
                       <TableCell>{e.template}</TableCell>
                       <TableCell>
                         <div className='relative flex items-center gap-2'>
-                          <Button variant="outline" onPress={() => {
-                            onOpen()
-                            setUser(e)
-                          }} >
-                          <Tooltip content="Update user">
-                                  <span className="text-xl text-center cursor-pointer active:opacity-50">
-                                    <EditIcon />
-                                  </span>
-                          </Tooltip>
-                          </Button>
-                          <Modal 
-                                isOpen={isOpen} 
-                                onOpenChange={onOpenChange}
-                                placement="top-center"
-
-                              >
-                                <ModalContent>
-                                  {(onClose) => (
-                                    <>
-                                      <ModalHeader className="flex flex-col gap-1">Update {user.name} Informations</ModalHeader>
-                                      <ModalBody>
-                                        <Input
-                                          autoFocus
-                                          label="Name"
-                                          placeholder="Enter Name"
-                                          value={userData.name}
-                                          variant="bordered"
-                                          name='name'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
-
-                                        <Input
-                                          autoFocus
-                                          label="Email"
-                                          placeholder="Enter email"
-
-                                          variant="bordered"
-                                          name='email'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
-
-                                        <Input
-                                          autoFocus
-                                          label="SMTP Pass"
-                                          placeholder="Enter SMTP Password"
-
-                                          variant="bordered"
-                                          name='smptpass'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
-                                        
-                                        <Input
-                                          label="Password"
-                                          placeholder="Enter your password"
-                                          type="password"
-                                          variant="bordered"
-                                          name='password'
-                                          onChange={(e) => handleUserData(e)}
-                                        />
-
-                                        <Select label={"role"} name='role' onChange={(e) => handleUserData(e)}>
-                                          <SelectItem key={"admin"} value={"admin"}>
-                                            Admin
-                                          </SelectItem>
-                                          <SelectItem key={"user"} value={"user"}>
-                                            User
-                                          </SelectItem>
-                                        </Select>
-                                      
-                                      </ModalBody>
-                                      <ModalFooter>
-                                        <Button color="danger" variant="flat" onPress={onClose}>
-                                          Close
-                                        </Button>
-
-                                        <Button color="primary" onPress={() => {
-                                          onClose()
-                                          handleUpdate()
-                                        }}>
-                                          Sign in
-                                        </Button>
-                                      </ModalFooter>
-                                    </>
-                                  )}
-                                </ModalContent>
-                          </Modal>
                           <AlertDialog>
                                 <AlertDialogTrigger asChild>
                                   <Button variant="outline">
-                                    <Tooltip color="danger" content="Delete user">
+                                    <Tooltip color="danger" content="Delete">
                                       <span className="text-xl text-center text-danger cursor-pointer active:opacity-50">
                                         <DeleteIcon />
                                       </span>
@@ -203,10 +118,9 @@ export default function ScheduleList() {
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
-                                    <AlertDialogTitle>Are you absolutely sure? {e.id}</AlertDialogTitle>
+                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                      This action cannot be undone. This will permanently delete your
-                                      account and remove your data from our servers.
+                                      This action cannot be undone. This will be permanently deleted
                                     </AlertDialogDescription>
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
