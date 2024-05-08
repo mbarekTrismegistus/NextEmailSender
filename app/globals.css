@@ -34,7 +34,7 @@
     padding: 13px!important;
     background-color: transparent!important;
     width: 100%!important;
-    border-radius: 9999px!important;
+    border-radius: 13px!important;
     border: rgb(63 63 70) 1px solid!important;
   }
   
@@ -45,7 +45,7 @@
   
   }
   .rti--input:focus{
-    border: #1b1b1b 1px solid!important;
+    border: var(--foreground) 1px solid!important;
   }
   .rti--container:focus-within{
     box-shadow: none!important;

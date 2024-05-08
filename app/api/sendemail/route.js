@@ -9,6 +9,7 @@ export async function POST(request) {
     
     let data = await request.json()
     let session = await auth()
+    console.log(data.data.emails)
 
     let res = await fetch("https://api.resend.com/emails", {
             method: "POST",

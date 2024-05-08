@@ -76,7 +76,7 @@ export default function New(props){
                     </Column>
                   </Row>
                 </Section>
-                <Section className="text-white py-5 bg-[#0A0F4F]">
+                <Section className="text-white py-5 bg-[#0A0F4F]"  >
                     <Row>
                       <Column className="px-[20px]">
                         <Text className="text-white">
@@ -134,37 +134,33 @@ export default function New(props){
                     </Row>
                 </Section>
                 <Section className="bg-[#E30D2A]">
-                  <Row>
+                  <Row className="text-start" style={{marginRight:"auto", display: "inline-block", paddingLeft:"20px"}}>
                     <DualColumn
                       columnOneContent={
-                        <Column className="text-center text-black">
-                          <Section>
-                            <Row>
+                        <>
                               <Column>
-                                <Text className="p-[23px] py-[15px] bg-[white] inline-block text-center rounded-full">
+                                <Text className="p-[23px] py-[15px] bg-[white] inline-block rounded-full">
                                   E
                                 </Text>
                               </Column>
-                              <Column>
+                              <Column  >
                                 <Text className="ms-3 m-0 text-white text-start">Official Email</Text>
                                 <Text className="ms-3 m-0 text-white font-bold">
                                   Contact@brosmedia.ma
                                 </Text>
                               </Column>
-                            </Row>
-                            
-
-                          </Section>
-                        </Column>
+                        </>
                       }
-                      pX={20}
+                     
+                      columnOneStyles={{paddingLeft: "0px", display: "block", textAlign: "left"}}
+                      columnTwoStyles={{paddingLeft: "0px", display: "block", textAlign: "left"}}
                       columnTwoContent={
                         
-                        <Column className="text-center text-black">
+                        <Column className="">
                           <Section>
                             <Row>
                               <Column>
-                                <Text className="p-[20px] py-[15px] bg-[white] inline-block text-center rounded-full">
+                                <Text className="p-[20px] py-[15px] bg-[white] inline-block text-center text-black rounded-full">
                                   W
                                 </Text>
                               </Column>

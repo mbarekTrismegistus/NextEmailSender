@@ -20,7 +20,7 @@ export default function Choose() {
               <p className="text-2xl font-bold">Product Tab</p>
               <Email/>
               <Link href={`/emails/main`} >
-                <Button className="mx-auto w-[100%]" color="primary" variant="shadow">
+                <Button className="mx-auto block" color="primary" size="lg" variant="shadow">
                     Choose
                 </Button>
               </Link>
@@ -36,7 +36,7 @@ export default function Choose() {
               <p className="text-2xl font-bold">Services tab</p>
               <New/>
               <Link href={`/emails/new`}>
-                <Button className="mx-auto w-[100%] mt-5" color="primary" variant="shadow">
+                <Button className="mx-auto mt-5 block" color="primary" size="lg" variant="shadow">
                     Choose
                 </Button>
               </Link>
@@ -52,7 +52,7 @@ export default function Choose() {
               <p className="text-2xl font-bold">Playground tab</p>
               <Email/>
               <Link href={`/emails/email3`} className="mt-5">
-                <Button className="mx-auto w-[100%] mt-5" color="primary" variant="shadow">
+                <Button className="mx-auto mt-5 block" color="primary" size="lg" variant="shadow">
                     Choose
                 </Button>
               </Link>
@@ -61,8 +61,8 @@ export default function Choose() {
         },
     ]
   return (
-    <div>
-        <div className="h-[10rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-40 ">
+    <div className="pb-[50px]">
+        <div className="h-[10rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-20 ">
             <p className="md:text-6xl mx-auto font-bold text-center mb-[60px] hero-text">Choose A Template</p>
             <Tabs tabs={tabs} choose={setTemplate} activeTabClassName={"text-black"}/>
             
