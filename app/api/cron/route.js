@@ -1,5 +1,4 @@
 import prisma from '@/prisma/client'
-import nodemailer from 'nodemailer'
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 
 import { NextResponse } from "next/server";
@@ -22,9 +21,9 @@ export async function GET(request) {
         },
         where: {
             isSent: false,
-            date: {
-                lte: today(getLocalTimeZone()).toDate(),
-            }
+            // date: {
+            //     lte: today(getLocalTimeZone()).toDate(),
+            // }
         }
     })
 
