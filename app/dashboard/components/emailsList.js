@@ -1,13 +1,27 @@
 "use client"
 
-import { useQuery } from '@tanstack/react-query';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select, Spinner} from "@nextui-org/react";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select, Spinner, Tooltip} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { Skeleton } from '@nextui-org/react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { DeleteIcon } from '@/app/components/DeleteIcon';
+import { Toast } from 'primereact/toast';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 
 
@@ -18,7 +32,8 @@ export default function EmailsList() {
     const params = useSearchParams()
     const router = useRouter()
     const [user, setUser] = useState(undefined)
-    
+    const queryClient = useQueryClient()
+    const toast = useRef(null);
 
     
 
@@ -44,6 +59,17 @@ export default function EmailsList() {
       }
     })
 
+    const {mutate: handleDelete, isPending: isDeleting} = useMutation({
+      mutationFn: async () => {
+        await axios.post("/api/deleteHistory")
+      },
+      onSuccess: () => {
+        toast.current.show({ severity: 'success', summary: 'success', detail: 'History Deleted !' });
+        queryClient.invalidateQueries("emails")
+      }
+      
+    })
+
 
     
   return (
@@ -60,22 +86,24 @@ export default function EmailsList() {
               isUsersLoading ? 
               <Skeleton className='rounded-xl w-full h-full before:!duration-1000'/>
               :
-              <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
-                  <SelectItem key={"all"} value={undefined}>
-                    All
-                  </SelectItem>
-                  {users.map((u) => {
-                    return(
-                      <SelectItem key={u.id} value={u.id}>
-                        {u.name}
-                      </SelectItem>
-                    )
-                  })}
-              </Select>
+
+                <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
+                    <SelectItem key={"all"} value={undefined}>
+                      All
+                    </SelectItem>
+                    {users.map((u) => {
+                      return(
+                        <SelectItem key={u.id} value={u.id}>
+                          {u.name}
+                        </SelectItem>
+                      )
+                    })}
+                </Select>
+
             }
             bottomContent={
               
-                <div className="flex w-full justify-center">
+                <div className="flex w-full justify-center relative">
                   <Pagination
                     isCompact
                     showControls
@@ -86,7 +114,34 @@ export default function EmailsList() {
                     onChange={(page) => {
                       router.push(`/dashboard/?page=${page}`)
                     }}
+                    className=''
                   />
+                  <Toast ref={toast} />
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="outline" className="absolute right-0">
+                        <Tooltip color="danger" content="Delete History">
+                          <span className="text-xl text-center text-danger cursor-pointer active:opacity-50">
+                            <DeleteIcon/>
+                          </span>
+                        </Tooltip>
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently delete your
+                          account and remove your data from our servers.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                  
                 </div>
              
             }
@@ -100,7 +155,7 @@ export default function EmailsList() {
               <TableColumn>Subject</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
-            <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching ? "loading" : "idle"}>
+            <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isLoading || isDeleting ? "loading" : "idle"}>
               {emails.data.map((e) => {
                 return(
                   <TableRow key={e.id}>
