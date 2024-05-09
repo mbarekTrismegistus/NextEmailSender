@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 import { auth } from '@/auth/auth';
 
-const RESEND_API_KEY = "re_2XcUAh4k_LaTe5yeQzBDd5pZEA55JZpbp";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
 export async function POST(request) {
     
