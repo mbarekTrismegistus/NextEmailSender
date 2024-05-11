@@ -31,10 +31,12 @@ export default function RootLayout({ children }) {
               </Providers>
             </SessionProvider>
             <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.93/build/spline-viewer.js"></script>
-            <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/spiral.js"></script>
+            <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/trio.js"></script>
           </body>
         </html>
     </TanstackProvider>
+  
+   
   );
 }
 

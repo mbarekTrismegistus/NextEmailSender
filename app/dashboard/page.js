@@ -12,6 +12,7 @@ import { ClockFill, EnvelopeFill, FileEarmarkRichtextFill, FiletypeHtml } from '
 import ScheduleList from './components/scheduleList';
 
 
+
 export default function page() {
 
     
@@ -22,6 +23,7 @@ export default function page() {
         increment: 1
       }
     })
+
 
     const [selectValue, setSelect] = useState("")
     
@@ -144,14 +146,14 @@ export default function page() {
       <p className="md:text-5xl font-bold mb-[40px] hero-text">Dashboard</p>
       {isLoading || isLoadingStats ? 
         <div className='flex items-center justify-center'>
-          <l-spiral
+          <l-trio
             size="80"
             stroke="4"
             stroke-length="0.15"
             bg-opacity="0.1"
             speed="1.4"
-            color="white"
-          ></l-spiral> 
+            color={"#10b981"}
+          ></l-trio> 
       
         </div>
         : 
