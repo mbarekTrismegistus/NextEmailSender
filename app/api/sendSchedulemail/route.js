@@ -35,11 +35,11 @@ export async function POST(request) {
     });
 
     if(res.data.id){
-        await prisma.schedule.delete({
-            where: {
-                id: data.data.id
-            }
-        })
+        // await prisma.schedule.delete({
+        //     where: {
+        //         id: data.data.id
+        //     }
+        // })
     
         await prisma.email.create({
             data: {
