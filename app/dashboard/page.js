@@ -160,7 +160,7 @@ export default function page() {
         <div className='p-5 mx-auto'>
         <div className='w-[100%]'>
           <p className="md:text-xl">Statistics</p>
-          <div className='lg:flex gap-4 items-stretch'>
+          <div className='xl:flex gap-4 items-stretch'>
             <Table className='flex-1 mt-5 relative' hideHeader topContent={
                 
                 <Select label="Data Range" placeholder="Select a range" onChange={handleSelectChange} selectedKeys={[selectValue]}>

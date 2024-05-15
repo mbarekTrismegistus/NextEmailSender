@@ -28,6 +28,8 @@ model User {
 
 model Email {
   id Int @id @default(autoincrement())
+  key String @unique
+  status String @default("")
   dateSend DateTime @default(now())
   template String
   subject String

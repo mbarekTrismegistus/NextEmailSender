@@ -7,7 +7,8 @@ export async function POST(request) {
 
     let data = await prisma.email.findMany({
         where:{
-            userId: Number(params.data.user) || undefined
+            userId: Number(params.data.user) || undefined,
+            status: params.data.status == "all" ? undefined : params.data.status
         },
         include: {
             user: true

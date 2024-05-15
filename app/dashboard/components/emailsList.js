@@ -1,7 +1,7 @@
 "use client"
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, SelectItem, Select, Spinner, Tooltip} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, Chip, TableBody, TableRow, TableCell, Button, SelectItem, Select, Spinner, Tooltip} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { DeleteIcon } from '@/app/components/DeleteIcon';
 import { Toast } from 'primereact/toast';
+import { CheckCircle, CheckCircleFill, EyeFill } from 'react-bootstrap-icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,20 +33,22 @@ export default function EmailsList() {
     const params = useSearchParams()
     const router = useRouter()
     const [user, setUser] = useState(undefined)
+    const [status, setStatus] = useState(undefined)
     const queryClient = useQueryClient()
     const toast = useRef(null);
 
     
-
+  
     let page = Number(params.get("page"))
 
     const {data: emails, isFetching, isLoading, isError} = useQuery({
-        queryKey: [page,'emails',user],
+        queryKey: [page,'emails',user, status],
         queryFn: async () => {
           const data = await axios.post("/api/getEmailsHistory", { data: {
             take: 5,
             skip: (page * 5) - 5,
-            user: user
+            user: user,
+            status: status
           }})
           return data.data
         }
@@ -86,8 +89,23 @@ export default function EmailsList() {
               isUsersLoading ? 
               <Skeleton className='rounded-xl w-full h-full before:!duration-1000'/>
               :
+                <div className='md:flex gap-4'>
+                    <Select label="Status" placeholder="Select a Status" onChange={(e) => setStatus(e.target.value)}>
+                          <SelectItem key={"all"} value={undefined}>
+                            All
+                          </SelectItem>
+                          <SelectItem key={"email.sent"} value={"email.sent"}>
+                            Sent
+                          </SelectItem>
+                          <SelectItem key={"email.delivered"} value={"email.delivered"}>
+                            Delivered
+                          </SelectItem>
+                          <SelectItem key={"email.opened"} value={"email.opened"}>
+                            Opened
+                          </SelectItem>
 
-                <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
+                    </Select>
+                    <Select label="Users" placeholder="Select a user" onChange={(e) => setUser(e.target.value)}>
                     <SelectItem key={"all"} value={undefined}>
                       All
                     </SelectItem>
@@ -98,7 +116,8 @@ export default function EmailsList() {
                         </SelectItem>
                       )
                     })}
-                </Select>
+                  </Select>
+                </div>
 
             }
             bottomContent={
@@ -153,9 +172,10 @@ export default function EmailsList() {
               <TableColumn>Receivers</TableColumn>
               <TableColumn>Template</TableColumn>
               <TableColumn>Subject</TableColumn>
+              <TableColumn>Status</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
-            <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isLoading || isDeleting ? "loading" : "idle"}>
+            <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching || isDeleting ? "loading" : "idle"}>
               {emails.data.map((e) => {
                 return(
                   <TableRow key={e.id}>
@@ -163,6 +183,11 @@ export default function EmailsList() {
                     <TableCell>{e.recievers.join(" - ")}</TableCell>
                     <TableCell>{e.template}</TableCell>
                     <TableCell>{e.subject}</TableCell>
+                    <TableCell>
+                      <Chip color={e.status == "email.sent" ? "warning" : e.status == "email.delivered" ? "secondary" : "primary"} variant='flat'
+                        startContent={e.status == "email.sent" ? <CheckCircle size={18} className='ms-1'/> : e.status == "email.delivered" ? <CheckCircleFill size={18} className='ms-1'/> : <EyeFill size={18} className='ms-1'/>}
+                      >{e.status.substring(6)}</Chip>
+                    </TableCell>
                     <TableCell>{e.dateSend.substring(0, 10)}</TableCell>
                   </TableRow>
                 )

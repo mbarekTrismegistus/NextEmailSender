@@ -43,6 +43,7 @@ export default function RawHtmlSender() {
     }
 
   })
+  console.log(file)
   
 
 
@@ -68,12 +69,23 @@ export default function RawHtmlSender() {
             <div className='flex-1'>
               <p className='mb-4 mt-[30px] ms-2 text-xl font-bold'>Import from excel file</p>
               <Shadcvinput className="border-1 dark:border-zinc-600 border-zinc-700 pt-3 pb-8" type='file' name='file' onChange={(e) => readXlsxFile(e.target.files[0]).then((rows) => {
-                let data = rows.map((r) => {
-                  return r[0]
-                })
-                data.splice(0,1)
+                let data = () => {
+                  let emails = []
+                  rows.map((r) => {
+                    r.map((c) => {
+                      if(c && c.includes("@")){
+                        emails.push(c)                        
+                      }
+                    })
+                    
+                  })
+                  return emails
+                }
                 setFile(data)
-                })}
+                }).catch((err) => {
+                  toast.current.show({ severity: 'error', summary: 'Error', detail: 'Format not supported (only .xlsx supported)' });
+                })
+              }
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Skeleton, DropdownSection} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Skeleton, DropdownSection, Image} from "@nextui-org/react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import {Avatar} from "@nextui-org/react";
@@ -22,7 +22,11 @@ export default function Header() {
           className="sm:hidden"
         />
       <NavbarBrand className="max-w-[100%]">
-        <Link href={"/"} className="font-bold text-inherit">Email Sender</Link>
+
+        <Link href={"/"} className="font-bold gap-2 flex text-inherit items-center">
+          <Image src="/logo.png" width={50} />
+          <p>Email Sender</p>
+        </Link>
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex  max-w-[100%]" justify="end">

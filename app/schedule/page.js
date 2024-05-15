@@ -37,13 +37,22 @@ export default function page() {
             setTemplate(e.target.value)
         }
     }
+    let day = date.day
+    let month = date.month
+    let year = date.year
+    let str = new Date(date) 
+    console.log(str)
 
     const {mutate: handleSend, isPending} = useMutation({
         mutationFn: async () => {
             let emails = selected.concat(file)
+            let day = date.day
+            let month = date.month
+            let year = date.year
             await axios.post('/api/ScheduleEmail', {
+                
                 data: {
-                    date: date.toDate(),
+                    date: new Date(date),
                     userId: Number(session.data.user.id),
                     recievers: emails,
                     sender: session.data.user.name,
@@ -70,7 +79,7 @@ export default function page() {
                     <p className="font-bold text-lg mb-3">Date</p>
                     <DatePicker
                     label="Date and time"
-                    minValue={today(getLocalTimeZone()).add({ days: 1})}
+                    minValue={today(getLocalTimeZone())}
                     defaultValue={date}
                     value={date}
                     onChange={setDate}
@@ -116,12 +125,23 @@ export default function page() {
                 <div className='flex-1'>
                 <p className='mb-4 mt-[30px] ms-2 text-xl font-bold'>Import from excel file</p>
                 <Shadcvinput className="border-1 dark:border-zinc-600 border-zinc-700 pt-3 pb-8" type='file' name='file' onChange={(e) => readXlsxFile(e.target.files[0]).then((rows) => {
-                    let data = rows.map((r) => {
-                    return r[0]
-                    })
-                    data.splice(0,1)
-                    setFile(data)
-                    })}
+                        let data = () => {
+                        let emails = []
+                        rows.map((r) => {
+                            r.map((c) => {
+                            if(c && c.includes("@")){
+                                emails.push(c)                        
+                            }
+                            })
+                            
+                        })
+                        return emails
+                        }
+                        setFile(data)
+                        }).catch((err) => {
+                        toast.current.show({ severity: 'error', summary: 'Error', detail: 'Format not supported (only .xlsx supported)' });
+                        })
+                    }
                 />
                 </div>
             </div>
