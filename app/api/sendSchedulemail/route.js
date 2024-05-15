@@ -12,7 +12,7 @@ export const revalidate = 0
 
 export async function POST(request) {
     
-    let data = await request.json()
+    let data = await request.json() 
     
     let html
     if(data.data.template != "html"){
