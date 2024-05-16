@@ -26,15 +26,16 @@ export async function POST(request) {
         html = data.data.html
     }
 
-  
+    
     let res = await resend.emails.send({
         from: process.env.MAIN_MAIL,
         to: data.data.recievers,
         subject: data.data.subject,
         html: html,
     });
+    console.log(res)
 
-    if(res.data.id){
+    if(res.data){
         await prisma.schedule.delete({
             where: {
                 id: data.data.id
@@ -54,7 +55,7 @@ export async function POST(request) {
     }
 
 
-    return NextResponse.json({message: "ok sent"})
+    return NextResponse.json({message: res})
 
     
 }
