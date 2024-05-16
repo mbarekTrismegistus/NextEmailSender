@@ -10,6 +10,7 @@ export async function POST(req) {
             res = await prisma.click.upsert({
                 where: {
                     emailKey: payload.data.email_id,
+                    link: payload.data.click.link
                 },
                 update: {
                     ipAddress: payload.data.click.ipAddress,

@@ -11,7 +11,8 @@ export async function POST(request) {
             status: params.data.status == "all" ? undefined : params.data.status
         },
         include: {
-            user: true
+            user: true,
+            Clicks: true
         },
         take: params.data.take,
         skip: params.data.skip >= 0 ? params.data.skip : 0,

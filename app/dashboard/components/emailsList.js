@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { DialogContent, DialogDescription, DialogHeader,Dialog, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 
 
@@ -74,7 +75,6 @@ export default function EmailsList() {
     })
 
 
-    
   return (
         isLoading 
         ? 
@@ -173,6 +173,7 @@ export default function EmailsList() {
               <TableColumn>Template</TableColumn>
               <TableColumn>Subject</TableColumn>
               <TableColumn>Status</TableColumn>
+              <TableColumn>click</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
             <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching || isDeleting ? "loading" : "idle"}>
@@ -187,6 +188,28 @@ export default function EmailsList() {
                       <Chip color={e.status == "email.sent" ? "warning" : e.status == "email.delivered" ? "secondary" : "primary"} variant='flat'
                         startContent={e.status == "email.sent" ? <CheckCircle size={18} className='ms-1'/> : e.status == "email.delivered" ? <CheckCircleFill size={18} className='ms-1'/> : <EyeFill size={18} className='ms-1'/>}
                       >{e.status.substring(6)}</Chip>
+                    </TableCell>
+                    <TableCell>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline">Edit Profile</Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                          <DialogHeader>
+                            <DialogTitle>Edit profile</DialogTitle>
+                            <DialogDescription>
+                              Make changes to your profile here. Click save when you're done.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            {e.Clicks.map((c) => {
+                              return (
+                                <p>{c.ipAddress}</p>
+                              )
+                            })}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </TableCell>
                     <TableCell>{e.dateSend.substring(0, 10)}</TableCell>
                   </TableRow>
