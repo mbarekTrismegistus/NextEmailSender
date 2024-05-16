@@ -21,7 +21,8 @@ export async function POST(request) {
     })
     let emailsCount = await prisma.email.count({
         where: {
-            userId: Number(params.data.user) || undefined
+            userId: Number(params.data.user) || undefined,
+            status: params.data.status == "all" ? undefined : params.data.status
         }
     })
 
