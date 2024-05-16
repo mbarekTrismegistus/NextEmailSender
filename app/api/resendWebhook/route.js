@@ -11,7 +11,8 @@ export async function POST(req) {
                 data: {
                     ipAddress: payload.data.click.ipAddress,
                     timestamp: payload.data.click.timestamp,
-                    emailKey: payload.data.email_id
+                    emailKey: payload.data.email_id,
+                    link: payload.data.click.link
                 }
             })
         }
