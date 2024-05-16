@@ -3,17 +3,30 @@ import prisma from '@/prisma/client';
 
 export async function POST(req) {
 
+        let res
+
         const payload = await req.json();
-        let res = await prisma.email.update({
-            where: {
-                key: payload.data.email_id
-            },
-            data: {
-                status: payload.type
-            }
-        })
+        if(payload.type == "email.clicked"){
+            res = await prisma.click.create({
+                data: {
+                    ipAddress: payload.data.click.ipAddress,
+                    timestamp: payload.data.click.timestamp,
+                    emailKey: payload.data.email_id
+                }
+            })
+        }
+        else{
+            res = await prisma.email.update({
+                where: {
+                    key: payload.data.email_id
+                },
+                data: {
+                    status: payload.type
+                }
+            })
+        }
         
-        console.log(payload);
+
         return NextResponse.json({ res })
     
     
