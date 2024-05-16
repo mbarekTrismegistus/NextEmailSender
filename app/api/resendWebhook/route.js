@@ -7,19 +7,8 @@ export async function POST(req) {
 
         const payload = await req.json();
         if(payload.type == "email.clicked"){
-            res = await prisma.click.upsert({
-                where: {
-                    AND: [
-                        {emailKey: payload.data.email_id},
-                        {link: payload.data.click.link}
-                    ]
-                },
-                update: {
-                    ipAddress: payload.data.click.ipAddress,
-                    timestamp: payload.data.click.timestamp,
-                    link: payload.data.click.link
-                },
-                create: {
+            res = await prisma.click.create({
+                data: {
                     ipAddress: payload.data.click.ipAddress,
                     timestamp: payload.data.click.timestamp,
                     emailKey: payload.data.email_id,
