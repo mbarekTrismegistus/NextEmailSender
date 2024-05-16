@@ -41,11 +41,10 @@ model Email {
 }
 
 model Click {
-  id Int @id @default(autoincrement())
   ipAddress String
   link String
   timestamp DateTime
-  emailKey String
+  emailKey String @id
   email Email @relation(fields: [emailKey], references: [key], onDelete: Cascade)
 }
 
