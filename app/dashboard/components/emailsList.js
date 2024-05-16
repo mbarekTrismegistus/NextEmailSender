@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { DeleteIcon } from '@/app/components/DeleteIcon';
 import { Toast } from 'primereact/toast';
-import { CheckCircle, CheckCircleFill, EyeFill } from 'react-bootstrap-icons';
+import { CheckCircle, CheckCircleFill, EyeFill, Link45deg } from 'react-bootstrap-icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -173,7 +173,7 @@ export default function EmailsList() {
               <TableColumn>Template</TableColumn>
               <TableColumn>Subject</TableColumn>
               <TableColumn>Status</TableColumn>
-              <TableColumn>click</TableColumn>
+              <TableColumn>clicks</TableColumn>
               <TableColumn>Date Sent</TableColumn>
             </TableHeader>
             <TableBody loadingContent={<Spinner/>} emptyContent={"No rows to display."} loadingState={isFetching || isDeleting ? "loading" : "idle"}>
@@ -190,24 +190,44 @@ export default function EmailsList() {
                       >{e.status.substring(6)}</Chip>
                     </TableCell>
                     <TableCell>
-                      <Dialog>
+                      <Dialog className='mx-5'>
                         <DialogTrigger asChild>
-                          <Button variant="outline">Edit Profile</Button>
+                          <Button variant="bordered" startContent={<Link45deg size={20}/>} color='primary' radius='full'>See Clicks</Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="min-w-[80%] overflow-x-scroll">
                           <DialogHeader>
-                            <DialogTitle>Edit profile</DialogTitle>
-                            <DialogDescription>
-                              Make changes to your profile here. Click save when you're done.
-                            </DialogDescription>
+                            <DialogTitle>Clicks History</DialogTitle>
                           </DialogHeader>
-                          <div className="grid gap-4 py-4">
-                            {e.Clicks.map((c) => {
-                              return (
-                                <p>{c.ipAddress}</p>
-                              )
-                            })}
-                          </div>
+                            <Table>
+                              <TableHeader>
+                                <TableColumn>Link</TableColumn>
+                                <TableColumn>IP Address</TableColumn>
+                                <TableColumn>Time</TableColumn>
+                              </TableHeader>
+                              <TableBody emptyContent={"No rows to display."}>
+                                {e.clicks.map((c) => {
+                                  return (
+                                      <TableRow>
+                                        <TableCell>
+                                          <p>
+                                            {c.link}
+                                          </p>
+                                        </TableCell>
+                                        <TableCell>
+                                          <p>
+                                            {c.ipAddress}
+                                          </p>
+                                        </TableCell>
+                                        <TableCell>
+                                          <p>
+                                            {c.timestamp}
+                                          </p>
+                                        </TableCell>
+                                      </TableRow>
+                                  )
+                                })}
+                            </TableBody>
+                          </Table>
                         </DialogContent>
                       </Dialog>
                     </TableCell>
