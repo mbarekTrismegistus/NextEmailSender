@@ -79,7 +79,7 @@ export default function page() {
                     <p className="font-bold text-lg mb-3">Date</p>
                     <DatePicker
                     label="Date and time"
-                    minValue={today(getLocalTimeZone())}
+                    minValue={today(getLocalTimeZone()).add({ days: 1})}
                     defaultValue={date}
                     value={date}
                     onChange={setDate}
