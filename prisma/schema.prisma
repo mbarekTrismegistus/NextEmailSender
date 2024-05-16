@@ -35,18 +35,12 @@ model Email {
   subject String
   sender String
   recievers String[]
-  Clicks Click[]
+  clicks Json[]
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }
 
-model Click {
-  ipAddress String
-  link String
-  timestamp DateTime
-  emailKey String @id
-  email Email @relation(fields: [emailKey], references: [key], onDelete: Cascade)
-}
+
 
 model Schedule {
   id Int @id @default(autoincrement())
