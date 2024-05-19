@@ -27,7 +27,7 @@ export default function Header() {
       <NavbarBrand className="max-w-[100%]">
 
         <Link href={"/"} className="font-bold gap-2 flex text-inherit items-center">
-          <Image src={theme == "dark" ? "/logo.png" : "/logoBlack.png"} width={50} />
+          <Image src={"/logo.png"} width={50} />
           <p>Email Sender</p>
         </Link>
       </NavbarBrand>
