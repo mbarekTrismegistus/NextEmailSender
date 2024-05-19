@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useRef, useState } from 'react';
 import { EditIcon } from '@/app/components/editIcon';
+import Link from 'next/link';
 
 
 export default function UsersList() {
@@ -86,7 +87,15 @@ export default function UsersList() {
         :
         <div>
           <Toast ref={toast} />
-          <Table classNames={{
+          <Table topContent={
+              <Button variant='bordered' color='primary'>
+                <Link href={"/registre"} className='w-[100%]'>
+                  <p>
+                    Add User
+                  </p>
+                </Link>
+              </Button>
+          } classNames={{
               base: "max-h-[300px] overflow-y-scroll"}} aria-label="Example static collection table">
               <TableHeader>
                 <TableColumn>Name</TableColumn>

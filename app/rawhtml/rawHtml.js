@@ -28,22 +28,25 @@ export default function RawHtmlSender() {
   const {mutate: send, isPending} = useMutation({
     mutationFn: async() => {
       let emails = selected.concat(file)
-      await axios.post("/api/sendemail" , { data: {
+      let res = await axios.post("/api/sendemail" , { data: {
         html: html,
         emails: emails,
         subject: subject,
         file: file
       }})
+      return res
     },
-    onSuccess: () => {
+    onSuccess: async(data) => {
+      console.log(data)
       toast.current.show({ severity: 'success', summary: 'Success', detail: 'Email sent !' });
     },
-    onError: () => {
-      toast.current.show({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+    onError: async(res) => {
+      console.log(res)
+      toast.current.show({ severity: 'error', summary: 'Error', detail: `Something went wrong ${res.response.data.message}` });
     }
 
   })
-  console.log(file)
+
   
 
 

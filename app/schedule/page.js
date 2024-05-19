@@ -7,13 +7,14 @@ import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { githubLight } from '@uiw/codemirror-theme-github';
 import { html as htmlLang } from '@codemirror/lang-html';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { TagsInput } from "react-tag-input-component";
 import { useMutation } from "@tanstack/react-query";
 import { Input as Shadcvinput } from '@/components/ui/input';
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import readXlsxFile from "read-excel-file";
+import { Toast } from 'primereact/toast';
 
 
 export default function page() {
@@ -24,6 +25,7 @@ export default function page() {
     const [isVisible, setVisible] = useState(false)
     const [selected, setSelected] = useState([]);
     const [template, setTemplate] = useState(null)
+    const toast = useRef(null);
 
     const session = useSession()
     function handleChange(e){
@@ -61,7 +63,14 @@ export default function page() {
                     subject: subject
                 }
             })
-        }
+        },
+        onSuccess: async() => {
+
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Email Scheduled !' });
+          },
+        onError: async() => {
+            toast.current.show({ severity: 'error', summary: 'Error', detail: `Something went wrong` });
+          }
     })
     
 
@@ -71,6 +80,7 @@ export default function page() {
     "loading"
     :
     <div className="p-[50px]">
+        <Toast ref={toast} />
         <p className="text-5xl font-bold hero-text mb-[40px]">Schedule An Email</p>
         <div className="px-5">
 
@@ -95,7 +105,7 @@ export default function page() {
                 <SelectItem key={"main"} value={"main"}>
                     Main Email
                 </SelectItem>
-                <SelectItem key={"new"} value={"new"}>
+                <SelectItem key={"new"} value={"offredm"}>
                     Second Email
                 </SelectItem>
                 <SelectItem key={"html"} value={"html"}>
@@ -145,7 +155,7 @@ export default function page() {
                 />
                 </div>
             </div>
-            <Button color="primary" className="my-5" isLoading={isPending} isDisabled={isPending} onClick={handleSend}>Send</Button>
+            <Button color="primary" className="my-5" isLoading={isPending} isDisabled={isPending} onClick={handleSend}>Add</Button>
         </div>
     </div>
   )

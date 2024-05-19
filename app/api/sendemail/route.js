@@ -11,7 +11,7 @@ export async function POST(request) {
     
     let data = await request.json()
     let session = await auth()
-    console.log(data.data.emails)
+
 
     let res = await resend.emails.send({
         from: process.env.MAIN_MAIL,
@@ -20,9 +20,9 @@ export async function POST(request) {
         html: data.data.html,
       });
 
-      console.log(res)
+    console.log(res)
     
-    if(res.data.id){
+    if(res.data?.id){
         await prisma.email.create({
             data: {
                 key: res.data.id,
@@ -36,7 +36,7 @@ export async function POST(request) {
     }
 
 
-    return NextResponse.json({message: "ok"}, {status: res.status})
+    return NextResponse.json({message: res.error ? res.error.message : "ok"}, {status: res.error ? res.error.statusCode : 200})
 
     
 }

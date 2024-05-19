@@ -28,7 +28,7 @@ export default function page(params) {
   })
 
   
-  const email = <Html lang="en" dir="ltr"><Mail/></Html>
+  const email = <Mail/>
 
 
   const {mutate: send, isPending} = useMutation({

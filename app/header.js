@@ -46,7 +46,11 @@ export default function Header() {
               {session && session.data?.user.role == "admin" ? 
                 <DropdownSection title={'Dashboard'} showDivider>
                   <DropdownItem>
-                    <Link href={"/dashboard"}>Dashboard</Link>
+                    <Link href={"/dashboard"}>
+                      <p className="pe-[5vw] w-[100%]">
+                        Dashboard
+                      </p>
+                    </Link>
                   </DropdownItem>
                 </DropdownSection>
               :
@@ -57,20 +61,39 @@ export default function Header() {
                 <p className="font-semibold">Signed in as</p>
                 <p className="font-semibold">{session.data.user.name}</p>
               </DropdownItem>
-              <DropdownItem className="py-3" endContent={<Envelope size={20}/>}>
-                <Link href={'/emails/choose'} className="me-[5vw]">
-                  Choose a Template
+              <DropdownItem className="py-3" endContent={
+                  <Link href={'/emails/choose'}>
+                    <Envelope size={20}/>
+                  </Link>
+                  }>
+                <Link href={'/emails/choose'} >
+                  <p className="pe-[5vw] w-[100%]">
+                    Choose a Template
+                  </p>
                 </Link>
               </DropdownItem>
-              <DropdownItem className="py-3" endContent={<CodeSlash size={20}/>}>
-                <Link href={'/rawhtml'} className="me-[5vw]">
-                  Send Email With HTML
-                </Link>
+              <DropdownItem className="py-3" endContent={
+                  <Link href={'/rawhtml'}>
+                    <CodeSlash size={20}/>
+                  </Link>
+                  }>
+                <Link href={'/rawhtml'}>
+                  <p className="pe-[5vw] w-[100%]">
+                    Send Email With HTML
+                  </p>
+                </Link>   
               </DropdownItem>
-              <DropdownItem className="py-3" endContent={<ClockFill size={20}/>}>
-                <Link href={'/schedule'} className="me-[5vw]">
-                  Schedule an Email
-                </Link>
+              <DropdownItem className="py-3" endContent={
+                  <Link href={'/schedule'}>
+                    <ClockFill size={20}/>
+                  </Link>
+                  }>
+                <Link href={'/schedule'} >
+                  <p className="pe-[5vw] w-[100%]">
+                    Schedule an Email
+                  </p>
+                </Link>  
+                    
               </DropdownItem>
               <DropdownItem key="logout" color="danger" onClick={signOut} className="py-3" endContent={<BoxArrowLeft size={20}/>}>
                 Log Out

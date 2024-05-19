@@ -1,3 +1,5 @@
+
+
 import { TextGenerateEffect } from "./components/text-generate-effect";
 import Buttons from "./components/buttons";
 
