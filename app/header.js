@@ -8,9 +8,12 @@ import {Avatar} from "@nextui-org/react";
 import ThemeSwitcher from "./components/themeSwitcher";
 import Link from "next/link";
 import { BoxArrowLeft, ClockFill, CodeSlash, Envelope } from "react-bootstrap-icons";
+import { useTheme } from "next-themes";
 
 export default function Header() {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme()
 
 
   let session = useSession()
@@ -24,7 +27,7 @@ export default function Header() {
       <NavbarBrand className="max-w-[100%]">
 
         <Link href={"/"} className="font-bold gap-2 flex text-inherit items-center">
-          <Image src="/logo.png" width={50} />
+          <Image src={theme == "dark" ? "/logo.png" : "/logoBlack.png"} width={50} />
           <p>Email Sender</p>
         </Link>
       </NavbarBrand>

@@ -87,22 +87,24 @@ export default function UsersList() {
         :
         <div>
           <Toast ref={toast} />
-          <Table topContent={
-              <Button variant='bordered' color='primary'>
-                <Link href={"/registre"} className='w-[100%]'>
+          <Table classNames={{
+            base: "max-h-[320px]"
+              }} 
+              topContent={
+              <Button variant='bordered' color='primary' className='p-[20px]'>
+                <Link href={"/registre"} className='w-[100%] '>
                   <p>
                     Add User
                   </p>
                 </Link>
               </Button>
-          } classNames={{
-              base: "max-h-[300px] overflow-y-scroll"}} aria-label="Example static collection table">
+          } aria-label="Example static collection table">
               <TableHeader>
                 <TableColumn>Name</TableColumn>
                 <TableColumn>Role</TableColumn>
                 <TableColumn>Actions</TableColumn>
               </TableHeader>
-              <TableBody loadingContent={"loading"} loadingState={isFetching || isPending ? <Spinner color='primary'/> : "idle"}>
+              <TableBody loadingContent={"loading"}  loadingState={isFetching || isPending ? <Spinner color='primary'/> : "idle"}>
                 {data.map((e) => {
                   return(
                     <TableRow key={e.id}>
