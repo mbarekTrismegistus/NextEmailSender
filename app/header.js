@@ -27,7 +27,7 @@ export default function Header() {
       <NavbarBrand className="max-w-[100%]">
 
         <Link href={"/"} className="font-bold gap-2 flex text-inherit items-center">
-          <Image src={"/logo.webp"} width={"auto"} height={"100%"} radius="none" />
+          <Image src={"/logo.webp"} width={200} radius="none" />
         </Link>
       </NavbarBrand>
 
