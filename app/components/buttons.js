@@ -26,7 +26,7 @@ export default function Buttons() {
                 </Button>
             </Link>
             <Link href={`/rawhtml`}>
-                <Button color="primary" variant="bordered" className="mx-2 text-white rounded-full">
+                <Button color="primary" variant="bordered" className="mx-2 rounded-full">
                     Raw HTML
                 </Button>
             </Link>
