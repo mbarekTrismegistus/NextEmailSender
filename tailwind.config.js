@@ -39,7 +39,11 @@ module.exports = {
             DEFAULT: "#E30D2A",
             foreground: "#ffffff",
           },
-          focus: "#a80c21",
+          secondary: {
+            DEFAULT: "#090F4f",
+            foreground: "ffffff"
+          },
+
         },
         
       },
@@ -47,9 +51,12 @@ module.exports = {
         colors: {
           primary: {
             DEFAULT: "#E30D2A",
-            foreground: "#18181b",
+            foreground: "#090F4f",
           },
-          focus: "#a80c21",
+          secondary: {
+            DEFAULT: "#ffffff",
+            foreground: "#090F4f"
+          },
         },
       },
     },

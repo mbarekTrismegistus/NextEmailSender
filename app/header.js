@@ -42,7 +42,7 @@ export default function Header() {
         <Dropdown placement="bottom-center" className="border border-1 border-zinc-300 dark:border-zinc-800 text-black bg-gradient-to-r from-slate-50 to-slate-200 dark:from-zinc-950 dark:to-zinc-900 dark:text-white">
           
           <DropdownTrigger>
-            <Avatar isBordered color="primary" src={`${session.data.user.image}`}/>
+            <Avatar isBordered color="secondary" src={`${session.data.user.image}`}/>
           </DropdownTrigger>
           <DropdownMenu>
               {session && session.data?.user.role == "admin" ? 

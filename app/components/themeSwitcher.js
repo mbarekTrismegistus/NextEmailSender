@@ -20,7 +20,7 @@ export default function ThemeSwitcher() {
   },[])
   if(isMounted){
     return(
-        <Switch isSelected={isSelected} onValueChange={(e) => handleChange(e)} startContent={<SunFill/>} endContent={<MoonStarsFill/>}/>
+        <Switch isSelected={isSelected} color="secondary" onValueChange={(e) => handleChange(e)} startContent={<SunFill/>} endContent={<MoonStarsFill/>}/>
     )
   }
   else{
