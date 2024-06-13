@@ -21,12 +21,12 @@ export default function Buttons() {
    
         <div className="opacity-0 buttons">
             <Link href={`/emails/choose`}>
-                <Button href="#" color="primary" variant="shadow" className="me-2 mt-5 rounded-full">
+                <Button href="#" color="primary" variant="shadow" className="me-2 mt-5 text-white rounded-full">
                     Choose A Template
                 </Button>
             </Link>
             <Link href={`/rawhtml`}>
-                <Button color="primary" variant="bordered" className="mx-2 dark:text-white text-black rounded-full">
+                <Button color="primary" variant="bordered" className="mx-2 text-white rounded-full">
                     Raw HTML
                 </Button>
             </Link>

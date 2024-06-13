@@ -12,15 +12,18 @@
   .dark {
     --background: url('/bg.png');
     --foreground: white;
-    --background-color: #1b1b1b;
+    --background-color: #0A0F4F;
 
   }
-  body {
+  html{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
     min-height: 100vh;
+  }
+
+  body {
+    
     color: rgb(var(--foreground-rgb));
   
   }

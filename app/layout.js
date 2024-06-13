@@ -19,8 +19,8 @@ export default function RootLayout({ children }) {
 
   return (
     <TanstackProvider>
-        <html lang="en">
-          <body className={`dark:bg-bgImage ${myFont.className}`}>
+        <html lang="en" className={`dark:bg-bgImage ${myFont.className}`}>
+          <body className={`${myFont.className}`}>
             <SessionProvider>
               <Providers>
                 <Header/>
