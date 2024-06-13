@@ -217,7 +217,7 @@ export default function page() {
             </Table>
             <div className='flex-1 mt-5'>
               <div className='grid h-[100%] lg:grid-cols-2 grid-cols-1 gap-4'>
-                  <div className='bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                  <div className='bg-[#e30d2a70] border-1 border-[#e30d2a] h-full min-h-[150px] rounded-3xl p-5'>
                     <div className='flex items-center'>
                       <EnvelopeFill size={25} className='me-3'/>
                       <p className='font-bold text-2xl self-start hero-text'>
@@ -233,7 +233,7 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                  <div className='bg-gradient-to-r from-cyan-500/50 to-blue-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                  <div className='bg-[#e30d2a70] border-1 border-[#e30d2a] h-full min-h-[150px] rounded-3xl p-5'>
                     <div className='flex items-center'>
                       <ClockFill size={25} className='me-3'/>
                       <p className='font-bold text-2xl self-start hero-text'>
@@ -249,7 +249,7 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                  <div className='bg-gradient-to-r from-sky-500/50 to-indigo-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                  <div className='bg-[#e30d2a70] border-1 border-[#e30d2a] h-full min-h-[150px] rounded-3xl p-5'>
                     <div className='flex items-center'>
                       <FiletypeHtml size={25} className='me-3'/>
                       <p className='font-bold text-2xl self-start hero-text'>
@@ -265,7 +265,7 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                  <div className='bg-gradient-to-r from-purple-500/50 to-pink-500/50 h-full min-h-[150px] rounded-3xl p-5'>
+                  <div className='bg-[#e30d2a70] border-1 border-[#e30d2a] h-full min-h-[150px] rounded-3xl p-5'>
                     <div className='flex items-start'>
                       <FileEarmarkRichtextFill className='me-3' size={25}/>
                       <p className='font-bold text-2xl self-start hero-text'>
