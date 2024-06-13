@@ -152,7 +152,7 @@ export default function page() {
             stroke-length="0.15"
             bg-opacity="0.1"
             speed="1.4"
-            color={"#10b981"}
+            color={"#ffffff"}
           ></l-trio> 
       
         </div>
