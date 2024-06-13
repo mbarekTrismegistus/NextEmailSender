@@ -10,7 +10,7 @@
     --background-color: rgb(241 245 249);
   }
   .dark {
-    --background: url('/bghero.webp');
+    --background: url('/bg.png');
     --foreground: white;
     --background-color: #1b1b1b;
 
