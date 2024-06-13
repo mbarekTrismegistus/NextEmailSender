@@ -19,7 +19,7 @@ export default function Header() {
   let session = useSession()
 
   return (
-    <Navbar className="justify-start px-[50px] bg-transparent" maxWidth={'full'}>
+    <Navbar className="justify-start px-[50px] bg-transparent backdrop-saturate-100" maxWidth={'full'}>
       <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
@@ -27,8 +27,7 @@ export default function Header() {
       <NavbarBrand className="max-w-[100%]">
 
         <Link href={"/"} className="font-bold gap-2 flex text-inherit items-center">
-          <Image src={"/logo.png"} width={50} />
-          <p>Email Sender</p>
+          <Image src={"/logo.webp"} width={"auto"} height={"100%"} radius="none" />
         </Link>
       </NavbarBrand>
 

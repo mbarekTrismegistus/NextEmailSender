@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
             <SessionProvider>
               <Providers>
                 <Header/>
-                <div className="bg-grid-small-black/[0.2] relative h-[100vh]">
+                <div className="flex items-center bg-grid-small-black/[0.2] relative h-[100vh]">
                   <div className="container min-w-[80vw]">
                     {children}
                   </div>
