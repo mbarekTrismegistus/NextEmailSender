@@ -14,13 +14,15 @@ export default async function page() {
 
   return (
 
-        <div className="flex flex-col justify-center w-[70%] mx-auto items-center text-center h-100">
+        <div className="flex pt-[15vh] w-[70%] mx-auto items-center text-center herosection">
+            <div>
                     <TextGenerateEffect words={words}/>
                     <div className="mt-[30px]">
                        
                         <Buttons/>
                        
                     </div>
+            </div>
         </div>
 
   )
