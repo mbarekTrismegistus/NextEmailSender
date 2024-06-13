@@ -113,7 +113,7 @@ export default function RawHtmlSender() {
             <Skeleton className='max-h-[400px] min-h-[400px] overflow-y-scroll rounded-xl before:!duration-1000'/>
             }
         </div>
-        <Button isDisabled={isPending} isLoading={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>send</Button>
+        <Button isDisabled={isPending} isLoading={isPending} color='primary' variant='shadow' className='mx-auto my-4 text-white text-center block' onClick={() => send()}>send</Button>
 
       </div>
   )

@@ -74,7 +74,7 @@ export default function page(params) {
                 />
           <p className='my-4 ms-2'>Subject</p>
           <Input size='sm' label="Subject" name='subject' onValueChange={setSubject} value={subject} radius='full' classNames={{inputWrapper: "border-1 border-zinc-500"}}/>
-          <Button color='primary' isDisabled={isPending} isLoading={isPending} variant='shadow' className='mx-auto my-4 text-center block' onClick={() => send()}>Send</Button>
+          <Button color='primary' isDisabled={isPending} isLoading={isPending} variant='shadow' className='mx-auto my-4 text-center text-white block' onClick={() => send()}>Send</Button>
 
         </div>
         <div className='max-h-[500px] flex-1 overflow-scroll scrollbar'>
