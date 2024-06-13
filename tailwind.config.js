@@ -36,20 +36,20 @@ module.exports = {
       light: {
         colors: {
           primary: {
-            DEFAULT: "#10b981",
+            DEFAULT: "#E30D2A",
             foreground: "#ffffff",
           },
-          focus: "#4361EE",
+          focus: "#a80c21",
         },
         
       },
       dark: {
         colors: {
           primary: {
-            DEFAULT: "#10b981",
+            DEFAULT: "#E30D2A",
             foreground: "#18181b",
           },
-          focus: "#4895EF",
+          focus: "#a80c21",
         },
       },
     },
